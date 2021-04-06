@@ -1,0 +1,13 @@
+//
+//  BackdropImage.swift
+//  Top Filmes
+//
+//  Created by Erick Borges on 09/03/21.
+//
+
+import UIKit
+
+class BackdropImage: UIViewController {
+    
+    
+}
