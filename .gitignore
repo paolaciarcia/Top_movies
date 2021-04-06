@@ -64,6 +64,9 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
+#ignore sketch file
+.sketch layout movies.sketch.icloud
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
