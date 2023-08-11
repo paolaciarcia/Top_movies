@@ -8,7 +8,6 @@
 import Foundation
 
 struct MovieDetail: Codable, Hashable {
-    
     let adult: Bool?
     let backdropPath: String?
     let title: String?
@@ -17,7 +16,7 @@ struct MovieDetail: Codable, Hashable {
     let genres: [Genre]?
     let overview: String?
     let id: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"
@@ -27,18 +26,15 @@ struct MovieDetail: Codable, Hashable {
         case genres
         case overview
         case id
-    } 
+    }
 }
 
 struct Genre: Codable, Hashable {
-    
     let id: Int?
     let name: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case name
     }
 }
-
-

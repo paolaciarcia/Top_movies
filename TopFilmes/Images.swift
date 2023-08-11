@@ -11,14 +11,7 @@ struct Images: Codable {
     let id: Int?
     let backdrops: [BackdropConfiguration]?
     let posters: [PosterConfiguration]?
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case backdrops = "backdrops"
-        case posters = "posters"
-    }
 }
-
 
 struct BackdropConfiguration: Codable {
     let aspectRatio: Int?
@@ -26,7 +19,7 @@ struct BackdropConfiguration: Codable {
     let height: Int?
     let width: Int?
     let iso6391: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case aspectRatio = "aspect_ratio"
         case backdropPath = "file_path"
@@ -36,14 +29,13 @@ struct BackdropConfiguration: Codable {
     }
 }
 
-
 struct PosterConfiguration: Codable {
     let aspectRatio: Int?
     let posterPath: String?
     let height: Int?
     let width: Int?
     let iso6391: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case aspectRatio = "aspect_ratio"
         case posterPath = "file_path"
@@ -52,4 +44,3 @@ struct PosterConfiguration: Codable {
         case iso6391 = "iso_639_1"
     }
 }
-

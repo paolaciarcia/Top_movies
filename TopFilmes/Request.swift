@@ -14,10 +14,10 @@ struct PopularMovies: Codable {
     let results: [Movie]?
     let totalPages: Int?
     let totalResults: Int?
-    
+
     enum CodingKeys: String, CodingKey {
-        case page = "page"
-        case results = "results"
+        case page
+        case results
         case totalPages = "total_pages"
         case totalResults = "total_results"
     }
@@ -33,16 +33,16 @@ struct Movie: Codable {
     let originalLanguage: String?
     let title: String?
     let backdropPath: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case posterPath = "poster_path"
-        case adult = "adult"
-        case overview = "overview"
+        case adult
+        case overview
         case genreIds = "genre_ids"
-        case id = "id"
+        case id
         case originalTitle = "original_title"
         case originalLanguage = "original_language"
-        case title = "title"
+        case title
         case backdropPath = "backdrop_path"
     }
 }
@@ -74,17 +74,17 @@ let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error
         print("houve um erro: \(error!)")
         return
     }
-    
+
     guard let httpResponse = response as? HTTPURLResponse else {
         print("não existe response")
         return
     }
-    
+
     guard httpResponse.statusCode == 200 else {
         print("status code diferente de 200")
         return
     }
-    
+
     guard let safeData = data else {
         print("o objeto data é nulo")
         return
@@ -98,4 +98,3 @@ let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error
         print("Decode falhou com erro: \(error)")
     }
 }.resume()
-

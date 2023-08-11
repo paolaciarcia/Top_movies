@@ -10,12 +10,11 @@ import Foundation
 // MARK: - Model
 
 struct PopularMovies: Codable {
-    
     let page: Int?
     let results: [Movie]?
     let totalPages: Int?
     let totalResults: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case page
         case results
@@ -25,7 +24,6 @@ struct PopularMovies: Codable {
 }
 
 struct Movie: Codable, Hashable {
-    
     let posterPath: String?
     let adult: Bool?
     let overview: String?
@@ -34,7 +32,7 @@ struct Movie: Codable, Hashable {
     let originalTitle: String?
     let originalLanguage: String?
     let title: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case posterPath = "poster_path"
         case adult
@@ -46,5 +44,3 @@ struct Movie: Codable, Hashable {
         case title
     }
 }
-
-

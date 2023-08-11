@@ -9,6 +9,5 @@ import UIKit
 
 class GenresHeaderView: UICollectionReusableView {
     static let reuseIdentifier = String(describing: GenresHeaderView.self)
-    
     @IBOutlet weak var textLabel: UILabel!
 }
