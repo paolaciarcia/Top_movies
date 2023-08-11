@@ -3,6 +3,7 @@
 
 target 'TopFilmes' do
   pod 'SwiftLint'
+  pod 'SwiftGen', '~> 6.0'
 
 end
 
