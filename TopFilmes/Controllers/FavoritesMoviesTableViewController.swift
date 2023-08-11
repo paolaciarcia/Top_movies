@@ -16,12 +16,12 @@ class DataSource {
 
 class FavoritesMoviesTableViewController: UITableViewController {
    
-    @IBOutlet var FavoriteMoviesTableView: UITableView!
+    @IBOutlet var favoriteMoviesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        FavoriteMoviesTableView.delegate = self
-        FavoriteMoviesTableView.dataSource = self
+        favoriteMoviesTableView.delegate = self
+        favoriteMoviesTableView.dataSource = self
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
