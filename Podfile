@@ -1,7 +1,7 @@
 # platform :ios, '16.2'
  use_frameworks!
 
-target 'Top Filmes' do
+target 'TopFilmes' do
   pod 'SwiftLint'
 
 end
