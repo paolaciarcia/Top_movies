@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import TMDBSwift
 
 class DataSource {
     static let shared = DataSource()
     private init() {}
-    var favoriteMovies: [Movie] = []
+    var favoriteMovies: [MovieMDB] = []
 }
 
 class FavoritesMoviesTableViewController: UITableViewController {
@@ -34,7 +35,7 @@ class FavoritesMoviesTableViewController: UITableViewController {
             fatalError("Could not create RecipeCell")
         }
         cell.titleLabel.text = DataSource.shared.favoriteMovies[indexPath.row].title
-        cell.setupImage(from: DataSource.shared.favoriteMovies[indexPath.row].posterPath ?? "")
+        cell.setupImage(from: DataSource.shared.favoriteMovies[indexPath.row].poster_path ?? "")
 
         return cell
     }

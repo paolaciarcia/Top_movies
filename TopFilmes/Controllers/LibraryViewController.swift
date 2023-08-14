@@ -6,15 +6,17 @@
 //
 
 import UIKit
+import TMDBSwift
 
 class LibraryViewController: UIViewController {
-    var movies: [Movie] = []
+    var movies: [MovieMDB] = []
     var theMovieDBService = TheMoviesDBService()
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
+        TMDBConfig.apikey = "07ca879e7c8e68dd031be7a9dfd50689"
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -22,9 +24,9 @@ class LibraryViewController: UIViewController {
     }
 
     func fetchMovies() {
-        theMovieDBService.requestMovie { (requestMovie) in
+        MovieMDB.popular(page: 1) { data, requestMovie in
             guard let requestMovie = requestMovie else { return }
-            self.movies = requestMovie.results ?? []
+            self.movies = requestMovie
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -47,7 +49,7 @@ extension LibraryViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? CollectionCell else {
             fatalError("Não foi possível instanciar a célula com identifier: CollectionCell")
         }
-        cell.setupImage(from: movies[indexPath.item].posterPath ?? "")
+        cell.setupImage(from: movies[indexPath.item].poster_path ?? "")
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -60,7 +62,7 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
         guard let movieDetailController = storyboard.instantiateViewController(identifier: "DetailViewController") as?
                 DetailViewController else { return }
         movieDetailController.id = selectedMovie.id
-        movieDetailController.movie = selectedMovie
+        movieDetailController.movies = selectedMovie
         present(movieDetailController, animated: true, completion: nil)
     }
 

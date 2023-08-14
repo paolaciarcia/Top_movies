@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import TMDBSwift
 
 class DetailViewController: UIViewController {
 
     let imageService = ImageService()
-
+    let apiKey = "07ca879e7c8e68dd031be7a9dfd50689"
     var id: Int?
-    var movie: Movie?
+    var movies: MovieMDB?
     var movieDetail: MovieDetail?
     var theMovieDBService = TheMoviesDBService()
 
@@ -33,7 +34,7 @@ class DetailViewController: UIViewController {
         } else if sender.tintColor == UIColor.yellow {
             sender.tintColor = UIColor.systemGray5
         }
-            guard let movie = self.movie else { return }
+            guard let movie = self.movies else { return }
             DataSource.shared.favoriteMovies.append(movie)
     }
 
@@ -53,35 +54,45 @@ class DetailViewController: UIViewController {
         showDetails(from: self.id ?? -1)
         favoriteButton.tintColor = UIColor.systemGray5
     }
-    // receber um id
+
     func showDetails(from id: Int) {
-        theMovieDBService.requestDetails(from: id) { (requestDetail) in
-            guard let requestDetail = requestDetail else { return }
-            DispatchQueue.main.async {
-                self.movieDetail = requestDetail
-                self.titleLabel.text = requestDetail.title
-                self.setupImage(from: requestDetail.backdropPath ?? "")
-                self.duracaoLabel.text = "\(requestDetail.runtime!) min"
-                self.overviewLabel.text = requestDetail.overview
-                guard let genre = self.movieDetail?.genres else { return }
-                var genres = ""
-                for value in genre {
-                    genres += value.name ?? ""
-                    if value.name != genre.last?.name {
-                        genres += ", "
+        TMDBConfig.apikey = "07ca879e7c8e68dd031be7a9dfd50689"
+        MovieMDB.movie(movieID: id) {_, movie in
+            if let movie = movie {
+                DispatchQueue.main.async {
+                    self.titleLabel.text = movie.title
+                    self.setupImage(from: movie.backdrop_path ?? "")
+                    self.duracaoLabel.text = "\(movie.runtime ?? 12) min"
+                    self.overviewLabel.text = movie.overview
+                    let lastGenre = movie.genres.last?.name
+                    var genreText = ""
+
+                    if !movie.genres.isEmpty {
+                        for value in movie.genres {
+                            if let value = value.name {
+                                genreText += value
+                            }
+
+                            if value.name != lastGenre {
+                                genreText += ", "
+                            }
+                        }
+                    } else {
+                        genreText = "No genres founded"
                     }
+
+                    self.genreLabel.text = genreText
+                    let formatter = DateFormatter()
+                    let dateFromString = formatter.date(from: movie.release_date ?? "")
+                    let calendar = Calendar.current.component(.year, from: dateFromString ?? Date())
+                    self.anoLancamentoLabel.text = "\(calendar)"
                 }
-                self.genreLabel.text = genres
-                let formatter = DateFormatter()
-                let dateFromString = formatter.date(from: requestDetail.releaseDate ?? "")
-                let calendar = Calendar.current.component(.year, from: dateFromString ?? Date())
-                self.anoLancamentoLabel.text = "\(calendar)"
             }
         }
     }
 
     func setupImage(from path: String) {
-        imageService.downloadImage(from: path) { (downloadImage) in
+        imageService.downloadImage(from: path) { downloadImage in
             DispatchQueue.main.async {
                 self.backdropImageView.image = downloadImage
             }
