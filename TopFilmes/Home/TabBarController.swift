@@ -37,6 +37,7 @@ class TabBarController: UITabBarController {
     private func setupAppearence() {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemOrange], for: .selected)
         UITabBar.appearance().tintColor = .systemOrange
+        UITabBar.appearance().backgroundColor = UIColor(red: 45/, green: 71, blue: 101, alpha: 1)
 
     }
 }
