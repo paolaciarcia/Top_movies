@@ -22,4 +22,30 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .blue
     }
+
+    override func loadView() {
+        view = FooView()
+    }
+}
+
+final class FooView: UIView {
+
+    let saferAreaView = UIView()
+
+    init() {
+        super.init(frame: .zero)
+        addSubview(saferAreaView)
+        saferAreaView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            saferAreaView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            saferAreaView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            saferAreaView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            saferAreaView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        saferAreaView.backgroundColor = .cyan
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

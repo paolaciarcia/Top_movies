@@ -15,7 +15,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         delegate = self
         setupBarItem()
-        setupUIAppearence()
+        setupTabBarAppearence()
         addCustomTabBarView()
     }
 
@@ -25,24 +25,23 @@ class TabBarController: UITabBarController {
     }
 
     private func setupBarItem() {
-
         let homeController = HomeViewController()
-        let homeBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house")?.withTintColor(.systemOrange))
+        let homeBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
         homeController.tabBarItem = homeBarItem
 
         let searchController = SearchViewController()
-        let searchBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglass")?.withTintColor(.systemOrange))
+        let searchBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglas"))
         searchController.tabBarItem = searchBarItem
 
         let favoritesController = FavoritesViewController()
-        let favoritesBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
+        let favoritesBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))
         favoritesController.tabBarItem = favoritesBarItem
 
         let controllers = [homeController, searchController, favoritesController]
         viewControllers = controllers
     }
 
-    private func setupUIAppearence() {
+    private func setupTabBarAppearence() {
         tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemOrange], for: .selected)
         tabBar.tintColor = .systemOrange
         tabBar.unselectedItemTintColor = .white
@@ -54,7 +53,7 @@ class TabBarController: UITabBarController {
     private func addCustomTabBarView() {
         customTabBarView.frame = tabBar.frame
         customTabBarView.backgroundColor = .black
-        customTabBarView.layer.cornerRadius = 8
+        customTabBarView.layer.cornerRadius = 8.0
         customTabBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         customTabBarView.layer.masksToBounds = false
         customTabBarView.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
@@ -79,7 +78,5 @@ class TabBarController: UITabBarController {
 }
 
 extension TabBarController: UITabBarControllerDelegate {
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("Item \(item) selected")
-    }
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {}
 }
