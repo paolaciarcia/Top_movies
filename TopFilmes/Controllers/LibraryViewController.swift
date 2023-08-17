@@ -90,6 +90,6 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 7.0, left: 7.0, bottom: 7.0, right: 7.0)
+        return UIEdgeInsets(top: 7.0, left: 7.0, bottom: 7.0, right: 7.0)
     }
 }

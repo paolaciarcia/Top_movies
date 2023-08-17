@@ -67,7 +67,7 @@ urlRequest.httpMethod = "GET"
 
 // MARK: - Sessão: executa a Requisição
 
-let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
     print("terminou a requisição")
 
     guard error == nil else {

@@ -17,7 +17,7 @@ class ImageService {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
 
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             print("terminou a requisição")
 
             guard error == nil else {
