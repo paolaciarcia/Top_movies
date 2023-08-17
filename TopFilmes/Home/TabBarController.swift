@@ -13,7 +13,6 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate = self
         setupBarItem()
         setupTabBarAppearence()
         addCustomTabBarView()
@@ -37,7 +36,11 @@ class TabBarController: UITabBarController {
         let favoritesBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))
         favoritesController.tabBarItem = favoritesBarItem
 
-        let controllers = [homeController, searchController, favoritesController]
+        let controllers = [
+            UINavigationController(rootViewController: homeController),
+            UINavigationController(rootViewController: searchController),
+            UINavigationController(rootViewController: favoritesController)
+        ]
         viewControllers = controllers
     }
 
@@ -75,8 +78,4 @@ class TabBarController: UITabBarController {
         tabBar.layoutIfNeeded()
         customTabBarView.frame = tabBar.frame
     }
-}
-
-extension TabBarController: UITabBarControllerDelegate {
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {}
 }

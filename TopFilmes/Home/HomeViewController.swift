@@ -20,11 +20,18 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        setupNavigationBar()
+        view.backgroundColor = .systemPink
     }
 
     override func loadView() {
         view = FooView()
+    }
+
+    private func setupNavigationBar() {
+        title = "Cinewatch"
+        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationItem.largeTitleDisplayMode = .always
     }
 }
 

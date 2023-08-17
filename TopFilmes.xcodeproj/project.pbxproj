@@ -29,6 +29,7 @@
 		C5FFE11C2A8E588500CA1A0D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE11B2A8E588500CA1A0D /* SearchViewController.swift */; };
 		C5FFE11E2A8E589500CA1A0D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE11D2A8E589500CA1A0D /* FavoritesViewController.swift */; };
 		C5FFE1212A8E649900CA1A0D /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1202A8E649900CA1A0D /* UIColor+Ext.swift */; };
+		C5FFE1232A8EBDF400CA1A0D /* CinewatchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		C5FFE11B2A8E588500CA1A0D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C5FFE11D2A8E589500CA1A0D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		C5FFE1202A8E649900CA1A0D /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinewatchCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,13 +116,13 @@
 				C5FFE1172A8E580200CA1A0D /* Search */,
 				C5FFE1182A8E581400CA1A0D /* Favorites */,
 				C5FFE10E2A8A415C00CA1A0D /* Helpers */,
-				60DF4DF325F11D3500A8EFAC /* SceneDelegate.swift */,
-				60DF4DF125F11D3500A8EFAC /* AppDelegate.swift */,
 				60DF4E2B25F7E68900A8EFAC /* Controllers */,
 				60DF4E2A25F7E66300A8EFAC /* Models */,
 				60DF4E2825F7E64B00A8EFAC /* Views */,
 				601C780A260A900300F13954 /* Service */,
 				60DF4DFA25F11D3700A8EFAC /* Assets.xcassets */,
+				60DF4DF325F11D3500A8EFAC /* SceneDelegate.swift */,
+				60DF4DF125F11D3500A8EFAC /* AppDelegate.swift */,
 				60DF4DFC25F11D3700A8EFAC /* LaunchScreen.storyboard */,
 				60DF4DFF25F11D3700A8EFAC /* Info.plist */,
 			);
@@ -178,6 +180,7 @@
 		C5FFE1142A8D5B5700CA1A0D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */,
 				C5FFE1152A8E513B00CA1A0D /* TabBarController.swift */,
 				C5FFE1192A8E586E00CA1A0D /* HomeViewController.swift */,
 			);
@@ -366,6 +369,7 @@
 				C5FFE1212A8E649900CA1A0D /* UIColor+Ext.swift in Sources */,
 				C5FFE1162A8E513B00CA1A0D /* TabBarController.swift in Sources */,
 				60DF4E2525F7E10A00A8EFAC /* MovieDetails.swift in Sources */,
+				C5FFE1232A8EBDF400CA1A0D /* CinewatchCoordinator.swift in Sources */,
 				60DF4DF225F11D3500A8EFAC /* AppDelegate.swift in Sources */,
 				60DF4E0D25F1273F00A8EFAC /* PopularMovies.swift in Sources */,
 				C5FFE1132A8A45B600CA1A0D /* Strings.swift in Sources */,
