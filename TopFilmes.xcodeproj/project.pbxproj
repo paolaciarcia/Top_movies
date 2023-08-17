@@ -25,6 +25,9 @@
 		C5FFE1102A8A430500CA1A0D /* LocalizableStrings.strings in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE10F2A8A430500CA1A0D /* LocalizableStrings.strings */; };
 		C5FFE1132A8A45B600CA1A0D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1122A8A45B600CA1A0D /* Strings.swift */; };
 		C5FFE1162A8E513B00CA1A0D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1152A8E513B00CA1A0D /* TabBarController.swift */; };
+		C5FFE11A2A8E586E00CA1A0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1192A8E586E00CA1A0D /* HomeViewController.swift */; };
+		C5FFE11C2A8E588500CA1A0D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE11B2A8E588500CA1A0D /* SearchViewController.swift */; };
+		C5FFE11E2A8E589500CA1A0D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE11D2A8E589500CA1A0D /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		C5FFE10F2A8A430500CA1A0D /* LocalizableStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = LocalizableStrings.strings; sourceTree = "<group>"; };
 		C5FFE1122A8A45B600CA1A0D /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C5FFE1152A8E513B00CA1A0D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		C5FFE1192A8E586E00CA1A0D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		C5FFE11B2A8E588500CA1A0D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C5FFE11D2A8E589500CA1A0D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				C5FFE1142A8D5B5700CA1A0D /* Home */,
+				C5FFE1172A8E580200CA1A0D /* Search */,
+				C5FFE1182A8E581400CA1A0D /* Favorites */,
 				C5FFE10E2A8A415C00CA1A0D /* Helpers */,
 				60DF4DF325F11D3500A8EFAC /* SceneDelegate.swift */,
 				60DF4DF125F11D3500A8EFAC /* AppDelegate.swift */,
@@ -168,8 +176,25 @@
 			isa = PBXGroup;
 			children = (
 				C5FFE1152A8E513B00CA1A0D /* TabBarController.swift */,
+				C5FFE1192A8E586E00CA1A0D /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		C5FFE1172A8E580200CA1A0D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C5FFE11B2A8E588500CA1A0D /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C5FFE1182A8E581400CA1A0D /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				C5FFE11D2A8E589500CA1A0D /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,14 +351,17 @@
 				603CC6D625FBBBF600911BE2 /* FavoritesMoviesTableViewController.swift in Sources */,
 				60DF4DF625F11D3500A8EFAC /* LibraryViewController.swift in Sources */,
 				603CC6D325FBB7A100911BE2 /* GenresHeaderView.swift in Sources */,
+				C5FFE11C2A8E588500CA1A0D /* SearchViewController.swift in Sources */,
 				C5FFE1162A8E513B00CA1A0D /* TabBarController.swift in Sources */,
 				60DF4E2525F7E10A00A8EFAC /* MovieDetails.swift in Sources */,
 				60DF4DF225F11D3500A8EFAC /* AppDelegate.swift in Sources */,
 				60DF4E0D25F1273F00A8EFAC /* PopularMovies.swift in Sources */,
 				C5FFE1132A8A45B600CA1A0D /* Strings.swift in Sources */,
 				60DF4E2225F6B61B00A8EFAC /* DetailViewController.swift in Sources */,
+				C5FFE11E2A8E589500CA1A0D /* FavoritesViewController.swift in Sources */,
 				60B0C0D826015D85007BE695 /* favoriteCell.swift in Sources */,
 				601C7810260A922100F13954 /* ImageService.swift in Sources */,
+				C5FFE11A2A8E586E00CA1A0D /* HomeViewController.swift in Sources */,
 				60DF4DF425F11D3500A8EFAC /* SceneDelegate.swift in Sources */,
 				6055F6FE260E90C50012A761 /* TheMoviesDBService.swift in Sources */,
 				60DF4E1425F2A2BF00A8EFAC /* CollectionCell.swift in Sources */,
