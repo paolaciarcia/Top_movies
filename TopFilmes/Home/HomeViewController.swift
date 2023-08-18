@@ -29,7 +29,7 @@ final class HomeViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        title = "Cinewatch"
+        navigationItem.title = "Cinewatch"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         setCustomNavigationBarTitleAttributes()
