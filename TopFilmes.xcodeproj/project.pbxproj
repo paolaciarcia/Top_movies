@@ -30,6 +30,7 @@
 		C5FFE11E2A8E589500CA1A0D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE11D2A8E589500CA1A0D /* FavoritesViewController.swift */; };
 		C5FFE1212A8E649900CA1A0D /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1202A8E649900CA1A0D /* UIColor+Ext.swift */; };
 		C5FFE1232A8EBDF400CA1A0D /* CinewatchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */; };
+		C5FFE1282A8FA9CC00CA1A0D /* SegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1272A8FA9CC00CA1A0D /* SegmentedControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		C5FFE11D2A8E589500CA1A0D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		C5FFE1202A8E649900CA1A0D /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinewatchCoordinator.swift; sourceTree = "<group>"; };
+		C5FFE1272A8FA9CC00CA1A0D /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		C5FFE1142A8D5B5700CA1A0D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C5FFE1252A8FA9A400CA1A0D /* SegmentedControl */,
 				C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */,
 				C5FFE1152A8E513B00CA1A0D /* TabBarController.swift */,
 				C5FFE1192A8E586E00CA1A0D /* HomeViewController.swift */,
@@ -209,6 +212,22 @@
 				C5FFE1202A8E649900CA1A0D /* UIColor+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C5FFE1252A8FA9A400CA1A0D /* SegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				C5FFE1262A8FA9B300CA1A0D /* View */,
+			);
+			path = SegmentedControl;
+			sourceTree = "<group>";
+		};
+		C5FFE1262A8FA9B300CA1A0D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5FFE1272A8FA9CC00CA1A0D /* SegmentedControlView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +388,7 @@
 				C5FFE1212A8E649900CA1A0D /* UIColor+Ext.swift in Sources */,
 				C5FFE1162A8E513B00CA1A0D /* TabBarController.swift in Sources */,
 				60DF4E2525F7E10A00A8EFAC /* MovieDetails.swift in Sources */,
+				C5FFE1282A8FA9CC00CA1A0D /* SegmentedControlView.swift in Sources */,
 				C5FFE1232A8EBDF400CA1A0D /* CinewatchCoordinator.swift in Sources */,
 				60DF4DF225F11D3500A8EFAC /* AppDelegate.swift in Sources */,
 				60DF4E0D25F1273F00A8EFAC /* PopularMovies.swift in Sources */,

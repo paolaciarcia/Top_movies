@@ -21,11 +21,11 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        view.backgroundColor = .systemPink
+        view.backgroundColor = UIColor(hexString: "#202D3C")
     }
 
     override func loadView() {
-        view = FooView()
+        view = ContentView()
     }
 
     private func setupNavigationBar() {
@@ -43,24 +43,35 @@ final class HomeViewController: UIViewController {
     }
 }
 
-final class FooView: UIView {
+final class ContentView: UIView {
 
-    let saferAreaView = UIView()
+    let segmentedControlView = SegmentedControlView()
 
     init() {
         super.init(frame: .zero)
-        addSubview(saferAreaView)
-        saferAreaView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            saferAreaView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            saferAreaView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            saferAreaView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            saferAreaView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
-        saferAreaView.backgroundColor = .cyan
+        segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
+        setup()
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setup() {
+        setupViewHierarchy()
+        setupConstraints()
+    }
+
+    private func setupViewHierarchy() {
+        addSubview(segmentedControlView)
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            segmentedControlView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            segmentedControlView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12)
+        ])
     }
 }
