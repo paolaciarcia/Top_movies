@@ -61,7 +61,7 @@ final class PopularContentViewCell: UICollectionViewCell {
         ])
     }
 
-    func show(image: String) {
-        image.image
+    func show(model: MovieModel) {
+        image.downloadImage(url: model.imageURL)
     }
 }
