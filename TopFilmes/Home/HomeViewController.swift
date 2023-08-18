@@ -32,7 +32,14 @@ final class HomeViewController: UIViewController {
         title = "Cinewatch"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.backgroundColor = .systemOrange
+        setCustomNavigationBarTitleAttributes()
+    }
+
+    private func setCustomNavigationBarTitleAttributes() {
+        let attrs = [
+            NSAttributedString.Key.font: UIFont(name: "SignPainter", size: 48)
+        ]
+        navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
     }
 }
 
