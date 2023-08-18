@@ -32,6 +32,7 @@
 		C5FFE1232A8EBDF400CA1A0D /* CinewatchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */; };
 		C5FFE1282A8FA9CC00CA1A0D /* SegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1272A8FA9CC00CA1A0D /* SegmentedControlView.swift */; };
 		C5FFE12C2A8FE4DD00CA1A0D /* PopularContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE12B2A8FE4DD00CA1A0D /* PopularContentViewCell.swift */; };
+		C5FFE12E2A8FEA8D00CA1A0D /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE12D2A8FEA8D00CA1A0D /* UIImageView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		C5FFE1222A8EBDF400CA1A0D /* CinewatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinewatchCoordinator.swift; sourceTree = "<group>"; };
 		C5FFE1272A8FA9CC00CA1A0D /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 		C5FFE12B2A8FE4DD00CA1A0D /* PopularContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularContentViewCell.swift; sourceTree = "<group>"; };
+		C5FFE12D2A8FEA8D00CA1A0D /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				C5FFE1202A8E649900CA1A0D /* UIColor+Ext.swift */,
+				C5FFE12D2A8FEA8D00CA1A0D /* UIImageView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				603CC6D625FBBBF600911BE2 /* FavoritesMoviesTableViewController.swift in Sources */,
 				60DF4DF625F11D3500A8EFAC /* LibraryViewController.swift in Sources */,
 				603CC6D325FBB7A100911BE2 /* GenresHeaderView.swift in Sources */,
+				C5FFE12E2A8FEA8D00CA1A0D /* UIImageView+Ext.swift in Sources */,
 				C5FFE11C2A8E588500CA1A0D /* SearchViewController.swift in Sources */,
 				C5FFE1212A8E649900CA1A0D /* UIColor+Ext.swift in Sources */,
 				C5FFE1162A8E513B00CA1A0D /* TabBarController.swift in Sources */,

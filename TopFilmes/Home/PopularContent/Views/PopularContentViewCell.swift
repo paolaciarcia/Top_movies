@@ -60,4 +60,8 @@ final class PopularContentViewCell: UICollectionViewCell {
             shadowView.bottomAnchor.constraint(equalTo: image.bottomAnchor)
         ])
     }
+
+    func show(image: String) {
+        image.image
+    }
 }
