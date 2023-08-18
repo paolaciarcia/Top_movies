@@ -10,19 +10,30 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var coordinator: CinewatchCoordinator?
+    var coordinator: Coordinator?
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
 
-        let controller = UINavigationController()
-        coordinator = CinewatchCoordinator(navigationController: controller)
-        coordinator?.start()
-
         guard let windowScene = scene as? UIWindowScene else { return }
         window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = controller
+
+        let controller = UINavigationController()
+
+        let homeCoordinator = HomeCoordinator(navigationController: controller)
+        let searchCoordinator = SearchCoordinator(navigationController: controller)
+        let favoritesCoordinator = FavoritesCoordinator(navigationController: controller)
+
+        coordinator = Coordinator(homeCoordinator: homeCoordinator,
+                                  searchCoordinator: searchCoordinator,
+                                  favoritesCoordinator: favoritesCoordinator)
+        self.window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
     }
 }
+
+// TabbarCoordinator
+// - CinewatchCoordinator
+// - SearchCoordinator
+// - FavoritesCoordinator

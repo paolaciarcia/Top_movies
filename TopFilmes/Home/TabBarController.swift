@@ -37,11 +37,13 @@ class TabBarController: UITabBarController {
         favoritesController.tabBarItem = favoritesBarItem
 
         let controllers = [
-            UINavigationController(rootViewController: homeController),
-            UINavigationController(rootViewController: searchController),
-            UINavigationController(rootViewController: favoritesController)
+            homeController,
+            searchController,
+            favoritesController
         ]
-        viewControllers = controllers
+        viewControllers = controllers.map {
+            UINavigationController(rootViewController: $0)
+        }
     }
 
     private func setupTabBarAppearence() {

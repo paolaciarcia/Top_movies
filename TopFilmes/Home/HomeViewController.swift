@@ -31,7 +31,8 @@ final class HomeViewController: UIViewController {
     private func setupNavigationBar() {
         title = "Cinewatch"
         navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.backgroundColor = .systemOrange
     }
 }
 

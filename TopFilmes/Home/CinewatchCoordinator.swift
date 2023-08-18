@@ -7,15 +7,40 @@
 
 import UIKit
 
-final class CinewatchCoordinator {
+final class Coordinator {
+    var homeCoordinator: HomeCoordinator
+    var searchCoordinator: SearchCoordinator
+    var favoritesCoordinator: FavoritesCoordinator
+
+    init(homeCoordinator: HomeCoordinator,
+         searchCoordinator: SearchCoordinator,
+         favoritesCoordinator: FavoritesCoordinator) {
+        self.homeCoordinator = homeCoordinator
+        self.searchCoordinator = searchCoordinator
+        self.favoritesCoordinator = favoritesCoordinator
+    }
+}
+
+final class HomeCoordinator {
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+}
 
-    func start() {
-        let viewController = TabBarController()
-        navigationController.show(viewController, sender: true)
+final class SearchCoordinator {
+    var navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+}
+
+final class FavoritesCoordinator {
+    var navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 }
