@@ -7,20 +7,25 @@
 
 import UIKit
 
-final class ContentView: UIView {
+final class MoviesView: UIView {
 
     let segmentedControlView = SegmentedControlView()
-    let collectionView = PopularContentCollectionView()
+    let collectionView = MoviesCollectionView()
 
     init() {
         super.init(frame: .zero)
-        segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
+        setupAutoresizingMaskIntoConstraints()
         setup()
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupAutoresizingMaskIntoConstraints() {
+        segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setup() {
@@ -30,13 +35,18 @@ final class ContentView: UIView {
 
     private func setupViewHierarchy() {
         addSubview(segmentedControlView)
+        addSubview(collectionView)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             segmentedControlView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             segmentedControlView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12)
+            segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+
+            collectionView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -12)
         ])
     }
 }

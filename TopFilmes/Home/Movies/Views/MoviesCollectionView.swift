@@ -1,5 +1,5 @@
 //
-//  PopularContentCollectionView.swift
+//  MoviesCollectionView.swift
 //  TopFilmes
 //
 //  Created by Paola Golombieski Ciarcia on 18/08/23.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class PopularContentCollectionView: UIView {
+final class MoviesCollectionView: UIView {
 
     private var movies: [MovieModel] = []
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.register(PopularContentViewCell.self,
-                                forCellWithReuseIdentifier: String(describing: PopularContentViewCell.self))
+        collectionView.register(MoviesViewCell.self,
+                                forCellWithReuseIdentifier: String(describing: MoviesViewCell.self))
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -47,18 +47,19 @@ final class PopularContentCollectionView: UIView {
 //    }
 }
 
-extension PopularContentCollectionView: UICollectionViewDataSource {
+extension MoviesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         movies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PopularContentViewCell.self), for: indexPath) as? PopularContentViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MoviesViewCell.self),
+                                                            for: indexPath) as? MoviesViewCell else { return UICollectionViewCell() }
         cell.show(model: movies[indexPath.item])
         return cell
     }
 }
 
-extension PopularContentCollectionView: UICollectionViewDelegate {
+extension MoviesCollectionView: UICollectionViewDelegate {
     //Will be implemeted after complete layout
 }

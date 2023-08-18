@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PopularContentViewCell: UICollectionViewCell {
+final class MoviesViewCell: UICollectionViewCell {
     private let image: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 12

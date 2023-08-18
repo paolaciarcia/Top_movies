@@ -9,7 +9,10 @@ import UIKit
 
 final class HomeViewController: UIViewController {
 
-    init() {
+    private let viewModel: MoviesViewModel
+
+    init(viewModel: MoviesViewModel = MoviesViewModel()) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -22,10 +25,11 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         view.backgroundColor = UIColor(hexString: "#202D3C")
+        viewModel.fetchMovies()
     }
 
     override func loadView() {
-        view = ContentView()
+        view = MoviesView()
     }
 
     private func setupNavigationBar() {
