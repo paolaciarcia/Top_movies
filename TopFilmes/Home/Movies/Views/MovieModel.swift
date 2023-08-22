@@ -5,8 +5,8 @@
 //  Created by Paola Golombieski Ciarcia on 18/08/23.
 //
 
-import Foundation
+import UIKit
 
 struct MovieModel: Equatable {
-    let imageURL: String
+    var image: UIImage?
 }

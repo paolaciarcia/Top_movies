@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import TMDBSwift
 
 final class HomeViewController: UIViewController {
 
+    private let contentView = MoviesView()
     private let viewModel: MoviesViewModel
 
     init(viewModel: MoviesViewModel = MoviesViewModel()) {
@@ -23,13 +25,14 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        TMDBConfig.apikey = "07ca879e7c8e68dd031be7a9dfd50689"
         setupNavigationBar()
         view.backgroundColor = UIColor(hexString: "#202D3C")
-        viewModel.fetchMovies()
+        show()
     }
 
     override func loadView() {
-        view = MoviesView()
+        view = contentView
     }
 
     private func setupNavigationBar() {
@@ -45,4 +48,20 @@ final class HomeViewController: UIViewController {
         ]
         navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
     }
+
+    private func show() {
+        let movies = [
+            MovieModel(image: .init(named: "posterImage")),
+            MovieModel(image: .init(named: "posterImage")),
+            MovieModel(image: .init(named: "posterImage")),
+            MovieModel(image: .init(named: "posterImage")),
+            MovieModel(image: .init(named: "posterImage")),
+            MovieModel(image: .init(named: "posterImage"))
+        ]
+        contentView.show(movies: movies)
+    }
+}
+
+extension HomeViewController: MoviesViewModelDelegate {
+    func showMovieImage(with string: String?) {}
 }

@@ -46,7 +46,12 @@ final class MoviesView: UIView {
 
             collectionView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -12)
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+
+    func show(movies: [MovieModel]) {
+        collectionView.setup(movies: movies)
     }
 }

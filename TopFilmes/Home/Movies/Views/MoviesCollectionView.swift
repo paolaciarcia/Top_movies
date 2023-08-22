@@ -11,8 +11,8 @@ final class MoviesCollectionView: UIView {
 
     private var movies: [MovieModel] = []
 
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private lazy var collection: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.register(MoviesViewCell.self,
                                 forCellWithReuseIdentifier: String(describing: MoviesViewCell.self))
 
@@ -24,6 +24,7 @@ final class MoviesCollectionView: UIView {
 
     init() {
         super.init(frame: .zero)
+        collection.backgroundColor = .yellow
         setup()
     }
 
@@ -32,22 +33,32 @@ final class MoviesCollectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        collection.frame = bounds
+    }
+
     private func setup() {
         setupViewHierarchy()
-//        setupConstraints()
     }
 
     private func setupViewHierarchy() {
-        addSubview(collectionView)
+        addSubview(collection)
     }
 
-//    private func setupConstraints() {
-//        NSLayoutConstraint.activate([
-//        ])
-//    }
+    func setup(movies: [MovieModel]) {
+        self.movies = movies
+        DispatchQueue.main.async { [weak self] in
+            self?.collection.reloadData()
+        }
+    }
 }
 
 extension MoviesCollectionView: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         movies.count
     }
@@ -55,11 +66,22 @@ extension MoviesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MoviesViewCell.self),
                                                             for: indexPath) as? MoviesViewCell else { return UICollectionViewCell() }
-        cell.show(model: movies[indexPath.item])
+        cell.show(image: movies[indexPath.row].image)
         return cell
     }
 }
 
 extension MoviesCollectionView: UICollectionViewDelegate {
-    //Will be implemeted after complete layout
+//Will be implemeted soon
+}
+
+extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 16
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width
+        return CGSize(width: width * 0.44, height: 250)
+    }
 }

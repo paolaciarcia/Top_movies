@@ -8,7 +8,7 @@
 import UIKit
 
 final class MoviesViewCell: UICollectionViewCell {
-    private let image: UIImageView = {
+    private let cellImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 12
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -19,10 +19,10 @@ final class MoviesViewCell: UICollectionViewCell {
     private let shadowView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
-        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = CGSize(width: 4, height: 6)
         view.layer.shadowOpacity = 0.5
-        view.layer.shadowRadius = 3
+        view.layer.shadowRadius = 4
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -43,25 +43,25 @@ final class MoviesViewCell: UICollectionViewCell {
     }
 
     private func setupViewHierarchy() {
-        image.addSubview(shadowView)
-        addSubview(image)
+        cellImage.addSubview(shadowView)
+        addSubview(cellImage)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: topAnchor),
-            image.leadingAnchor.constraint(equalTo: leadingAnchor),
-            image.trailingAnchor.constraint(equalTo: trailingAnchor),
-            image.bottomAnchor.constraint(equalTo: bottomAnchor),
+            cellImage.topAnchor.constraint(equalTo: topAnchor),
+            cellImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            cellImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            cellImage.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            shadowView.topAnchor.constraint(equalTo: image.topAnchor),
-            shadowView.leadingAnchor.constraint(equalTo: image.leadingAnchor),
-            shadowView.trailingAnchor.constraint(equalTo: image.trailingAnchor),
-            shadowView.bottomAnchor.constraint(equalTo: image.bottomAnchor)
+            shadowView.topAnchor.constraint(equalTo: cellImage.topAnchor),
+            shadowView.leadingAnchor.constraint(equalTo: cellImage.leadingAnchor),
+            shadowView.trailingAnchor.constraint(equalTo: cellImage.trailingAnchor),
+            shadowView.bottomAnchor.constraint(equalTo: cellImage.bottomAnchor)
         ])
     }
 
-    func show(model: MovieModel) {
-        image.downloadImage(url: model.imageURL)
+    func show(image: UIImage?) {
+        cellImage.image = image
     }
 }
