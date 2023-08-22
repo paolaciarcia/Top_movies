@@ -12,7 +12,9 @@ final class MoviesCollectionView: UIView {
     private var movies: [MovieModel] = []
 
     private lazy var collection: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(MoviesViewCell.self,
                                 forCellWithReuseIdentifier: String(describing: MoviesViewCell.self))
 
@@ -35,7 +37,7 @@ final class MoviesCollectionView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        collection.frame = bounds
+        collection.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height * 0.3)
     }
 
     private func setup() {
@@ -72,16 +74,19 @@ extension MoviesCollectionView: UICollectionViewDataSource {
 }
 
 extension MoviesCollectionView: UICollectionViewDelegate {
-//Will be implemeted soon
+    //Will be implemeted soon
 }
 
 extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return 12
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width
-        return CGSize(width: width * 0.44, height: 250)
+        return CGSize(width: frame.width * 0.31, height: frame.height * 0.27)
     }
 }
+
+
+//sombra
+//erros log
