@@ -19,10 +19,10 @@ final class MoviesViewCell: UICollectionViewCell {
     private let shadowView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
+        view.backgroundColor = .black
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 4, height: 6)
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
         view.layer.shadowOpacity = 0.5
-        view.layer.shadowRadius = 4
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -43,7 +43,7 @@ final class MoviesViewCell: UICollectionViewCell {
     }
 
     private func setupViewHierarchy() {
-        cellImage.addSubview(shadowView)
+        addSubview(shadowView)
         addSubview(cellImage)
     }
 
