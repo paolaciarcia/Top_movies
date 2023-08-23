@@ -11,17 +11,6 @@ final class MoviesView: UIView {
 
     let segmentedControlView = SegmentedControlView()
     let collectionView = MoviesCollectionView()
-    let secondCollectionView = MoviesCollectionView()
-    let thirdCollectionView = MoviesCollectionView()
-
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.backgroundColor = .gray
-        stackView.spacing = 20
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
 
     init() {
         super.init(frame: .zero)
@@ -41,10 +30,7 @@ final class MoviesView: UIView {
     
     private func setupViewHierarchy() {
         addSubview(segmentedControlView)
-        addSubview(stackView)
-        stackView.addArrangedSubview(collectionView)
-        stackView.addArrangedSubview(secondCollectionView)
-        stackView.addArrangedSubview(thirdCollectionView)
+        addSubview(collectionView)
     }
 
     private func setupConstraints() {
@@ -53,22 +39,19 @@ final class MoviesView: UIView {
             segmentedControlView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
             segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
 
-            stackView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            collectionView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 
     private func setupAutoresizingMaskIntoConstraints() {
         segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        secondCollectionView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func show(movies: [MovieModel]) {
         collectionView.setup(movies: movies)
-        secondCollectionView.setup(movies: movies)
-        thirdCollectionView.setup(movies: movies)
     }
 }

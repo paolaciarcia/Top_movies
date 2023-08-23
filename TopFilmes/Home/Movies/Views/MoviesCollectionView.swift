@@ -11,7 +11,20 @@ final class MoviesCollectionView: UIView {
 
     private var movies: [MovieModel] = []
 
-    private lazy var collection: UICollectionView = {
+    private lazy var popularMoviesCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(MoviesViewCell.self,
+                                forCellWithReuseIdentifier: String(describing: MoviesViewCell.self))
+
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+
+    private lazy var ratedMoviesCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -26,7 +39,8 @@ final class MoviesCollectionView: UIView {
 
     init() {
         super.init(frame: .zero)
-        collection.backgroundColor = .yellow
+        popularMoviesCollectionView.backgroundColor = .yellow
+        ratedMoviesCollectionView.backgroundColor = .red
         setup()
     }
 
@@ -35,23 +49,36 @@ final class MoviesCollectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        collection.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height * 0.3)
-    }
-
     private func setup() {
         setupViewHierarchy()
+        setupConstraints()
     }
 
     private func setupViewHierarchy() {
-        addSubview(collection)
+        addSubview(popularMoviesCollectionView)
+        addSubview(ratedMoviesCollectionView)
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            popularMoviesCollectionView.topAnchor.constraint(equalTo: topAnchor),
+            popularMoviesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            popularMoviesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            popularMoviesCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
+            popularMoviesCollectionView.heightAnchor.constraint(equalTo: widthAnchor),
+            ratedMoviesCollectionView.topAnchor.constraint(equalTo: popularMoviesCollectionView.bottomAnchor, constant: 20),
+            ratedMoviesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            ratedMoviesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            ratedMoviesCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
+            ratedMoviesCollectionView.heightAnchor.constraint(equalTo: widthAnchor)
+        ])
     }
 
     func setup(movies: [MovieModel]) {
         self.movies = movies
         DispatchQueue.main.async { [weak self] in
-            self?.collection.reloadData()
+            self?.popularMoviesCollectionView.reloadData()
+            self?.ratedMoviesCollectionView.reloadData()
         }
     }
 }
