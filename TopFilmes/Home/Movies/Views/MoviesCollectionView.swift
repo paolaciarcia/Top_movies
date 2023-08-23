@@ -16,6 +16,7 @@ final class MoviesCollectionView: UIView {
         flowLayout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = UIColor(hexString: "#202D3C")
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(MoviesViewCell.self,
                                 forCellWithReuseIdentifier: String(describing: MoviesViewCell.self))
 
@@ -30,6 +31,7 @@ final class MoviesCollectionView: UIView {
         flowLayout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = UIColor(hexString: "#202D3C")
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(MoviesViewCell.self,
                                 forCellWithReuseIdentifier: String(describing: MoviesViewCell.self))
 
@@ -113,5 +115,3 @@ extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: frame.width * 0.31, height: frame.height * 0.27)
     }
 }
-//erros log
-//scrollView

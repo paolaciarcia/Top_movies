@@ -9,8 +9,9 @@ import UIKit
 
 final class MoviesView: UIView {
 
-    let segmentedControlView = SegmentedControlView()
-    let collectionView = MoviesCollectionView()
+    private let segmentedControlView = SegmentedControlView()
+    private let collectionView = MoviesCollectionView()
+    private let scrollView = UIScrollView()
 
     init() {
         super.init(frame: .zero)
@@ -30,7 +31,8 @@ final class MoviesView: UIView {
     
     private func setupViewHierarchy() {
         addSubview(segmentedControlView)
-        addSubview(collectionView)
+        addSubview(scrollView)
+        scrollView.addSubview(collectionView)
     }
 
     private func setupConstraints() {
@@ -39,16 +41,25 @@ final class MoviesView: UIView {
             segmentedControlView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
             segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
 
-            collectionView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            scrollView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+
+            collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            collectionView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            collectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
 
     private func setupAutoresizingMaskIntoConstraints() {
         segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .gray
     }
 
     func show(movies: [MovieModel]) {
