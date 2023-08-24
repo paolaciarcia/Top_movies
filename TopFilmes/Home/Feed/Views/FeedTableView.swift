@@ -12,14 +12,10 @@ final class FeedTableView: UIView {
     private var movies: [MovieModel] = []
 
     private lazy var homeFeedTableView: UITableView = {
-//        let tableView = UICollectionViewFlowLayout()
-//        flowLayout.scrollDirection = .horizontal
-        let tableView = UITableView()
-//        UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        tableView.backgroundColor = UIColor(hexString: "#202D3C")
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .yellow//UIColor(hexString: "#202D3C")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: CollectionViewTableViewCell.self))
         tableView.dataSource = self
-        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -34,23 +30,17 @@ final class FeedTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        homeFeedTableView.frame = bounds
+    }
+
     private func setup() {
         setupViewHierarchy()
-        setupConstraints()
     }
 
     private func setupViewHierarchy() {
         addSubview(homeFeedTableView)
-    }
-
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            homeFeedTableView.topAnchor.constraint(equalTo: topAnchor),
-            homeFeedTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            homeFeedTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            homeFeedTableView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
-            homeFeedTableView.widthAnchor.constraint(equalTo: widthAnchor)
-        ])
     }
 
     func setup(movies: [MovieModel]) {
@@ -63,17 +53,17 @@ final class FeedTableView: UIView {
 
 extension FeedTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 20
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+        return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CollectionViewTableViewCell.self),
                                                        for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
-        cell.show(image: movies[indexPath.row].image)
+        cell.backgroundColor = .systemPink
         return cell
     }
 
@@ -81,21 +71,7 @@ extension FeedTableView: UITableViewDataSource {
         return 200
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    private func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
-    }
-}
-
-extension FeedTableView: UITableViewDelegate {
-    //Will be implemeted soon
-}
-
-extension FeedTableView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 12
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width * 0.31, height: frame.height * 0.27)
     }
 }

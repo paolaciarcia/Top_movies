@@ -8,23 +8,16 @@
 import UIKit
 
 final class CollectionViewTableViewCell: UITableViewCell {
-    private let cellImage: UIImageView = {
-        let image = UIImageView()
-        image.layer.cornerRadius = 12
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.clipsToBounds = true
-        return image
-    }()
 
-    private let shadowView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 12
-        view.backgroundColor = .black
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 4)
-        view.layer.shadowOpacity = 0.5
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var collectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: String(describing: CollectionViewCell.self))
+        collection.dataSource = self
+        collection.delegate = self
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        return collection
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -37,31 +30,47 @@ final class CollectionViewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        collectionView.frame = contentView.bounds
+    }
+
     private func setup() {
         setupViewHierarchy()
-        setupConstraints()
     }
 
     private func setupViewHierarchy() {
-        addSubview(shadowView)
-        addSubview(cellImage)
-    }
-
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            cellImage.topAnchor.constraint(equalTo: topAnchor),
-            cellImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            cellImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cellImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-
-            shadowView.topAnchor.constraint(equalTo: cellImage.topAnchor),
-            shadowView.leadingAnchor.constraint(equalTo: cellImage.leadingAnchor),
-            shadowView.trailingAnchor.constraint(equalTo: cellImage.trailingAnchor),
-            shadowView.bottomAnchor.constraint(equalTo: cellImage.bottomAnchor)
-        ])
-    }
-
-    func show(image: UIImage?) {
-        cellImage.image = image
+        addSubview(collectionView)
     }
 }
+
+extension CollectionViewTableViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: String(describing: CollectionViewCell.self), for: indexPath
+        ) as? CollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.backgroundColor = .blue
+        return cell
+    }
+}
+
+extension CollectionViewTableViewCell: UICollectionViewDelegate {
+
+}
+
+extension CollectionViewTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: frame.width * 0.31, height: frame.height * 0.27)
+    }
+}
+
