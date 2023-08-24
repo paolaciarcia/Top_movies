@@ -12,8 +12,8 @@ final class CollectionViewCell: UICollectionViewCell {
     private let cellImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 12
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
 
@@ -44,21 +44,25 @@ final class CollectionViewCell: UICollectionViewCell {
     }
 
     private func setupViewHierarchy() {
-        addSubview(shadowView)
-        addSubview(cellImage)
+        contentView.addSubview(shadowView)
+        shadowView.addSubview(cellImage)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            cellImage.topAnchor.constraint(equalTo: topAnchor),
-            cellImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            cellImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cellImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            shadowView.topAnchor.constraint(equalTo: topAnchor),
+            shadowView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            shadowView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            shadowView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            shadowView.topAnchor.constraint(equalTo: cellImage.topAnchor),
-            shadowView.leadingAnchor.constraint(equalTo: cellImage.leadingAnchor),
-            shadowView.trailingAnchor.constraint(equalTo: cellImage.trailingAnchor),
-            shadowView.bottomAnchor.constraint(equalTo: cellImage.bottomAnchor)
+            cellImage.topAnchor.constraint(equalTo: shadowView.topAnchor),
+            cellImage.leadingAnchor.constraint(equalTo: shadowView.leadingAnchor),
+            cellImage.trailingAnchor.constraint(equalTo: shadowView.trailingAnchor),
+            cellImage.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor)
         ])
+    }
+
+    func show(image: UIImage?) {
+        cellImage.image = image
     }
 }

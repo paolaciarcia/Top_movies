@@ -33,10 +33,10 @@ final class HomeViewController: UIViewController {
         view = contentView
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        contentView.frame = view.bounds
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        contentView.frame = view.bounds
+//    }
 
     private func setupNavigationBar() {
         navigationItem.title = "Cinewatch"

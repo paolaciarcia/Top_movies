@@ -13,9 +13,10 @@ final class FeedTableView: UIView {
 
     private lazy var homeFeedTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.backgroundColor = .yellow//UIColor(hexString: "#202D3C")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: CollectionViewTableViewCell.self))
+        tableView.backgroundColor = UIColor(hexString: "#202D3C")
+        tableView.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: String(describing: CollectionViewTableViewCell.self))
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -37,6 +38,16 @@ final class FeedTableView: UIView {
 
     private func setup() {
         setupViewHierarchy()
+//        foo()
+    }
+
+    private func foo() {
+        NSLayoutConstraint.activate([
+            homeFeedTableView.topAnchor.constraint(equalTo: topAnchor),
+            homeFeedTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            homeFeedTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            homeFeedTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
 
     private func setupViewHierarchy() {
@@ -51,9 +62,9 @@ final class FeedTableView: UIView {
     }
 }
 
-extension FeedTableView: UITableViewDataSource {
+extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20
+        return 4
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,15 +74,15 @@ extension FeedTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CollectionViewTableViewCell.self),
                                                        for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
-        cell.backgroundColor = .systemPink
+        cell.setup(movies: movies)
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 182
     }
 
-    private func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
 }
