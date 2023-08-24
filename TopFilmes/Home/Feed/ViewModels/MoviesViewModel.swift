@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import TMDBSwift
 
 protocol MoviesListProtocol {
 
@@ -28,10 +27,10 @@ final class MoviesViewModel {
     }
 
     func fetchMovies() {
-        MovieMDB.popular(page: 1) { data, requestMovie in
-            guard let requestMovie = requestMovie else { return }
-            self.delegate?.showMovieImage(with: requestMovie[0].backdrop_path)
-        }
+//        MovieMDB.popular(page: 1) { data, requestMovie in
+//            guard let requestMovie = requestMovie else { return }
+//            self.delegate?.showMovieImage(with: requestMovie[0].backdrop_path)
+//        }
     }
 }
 /*

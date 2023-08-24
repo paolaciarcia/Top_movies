@@ -6,14 +6,13 @@
 //
 
 import UIKit
-import TMDBSwift
 
 class DetailViewController: UIViewController {
 
     let imageService = ImageService()
     let apiKey = "07ca879e7c8e68dd031be7a9dfd50689"
     var id: Int?
-    var movies: MovieMDB?
+//    var movies: MovieMDB?
     var movieDetail: MovieDetail?
     var theMovieDBService = TheMoviesDBService()
 
@@ -34,8 +33,8 @@ class DetailViewController: UIViewController {
         } else if sender.tintColor == UIColor.yellow {
             sender.tintColor = UIColor.systemGray5
         }
-            guard let movie = self.movies else { return }
-            DataSource.shared.favoriteMovies.append(movie)
+//            guard let movie = self.movies else { return }
+//            DataSource.shared.favoriteMovies.append(movie)
     }
 
     func setupButton(from sender: UIButton) {
@@ -56,39 +55,39 @@ class DetailViewController: UIViewController {
     }
 
     func showDetails(from id: Int) {
-        TMDBConfig.apikey = "07ca879e7c8e68dd031be7a9dfd50689"
-        MovieMDB.movie(movieID: id) {_, movie in
-            if let movie = movie {
-                DispatchQueue.main.async {
-                    self.titleLabel.text = movie.title
-                    self.setupImage(from: movie.backdrop_path ?? "")
-                    self.duracaoLabel.text = "\(movie.runtime ?? 12) min"
-                    self.overviewLabel.text = movie.overview
-                    let lastGenre = movie.genres.last?.name
-                    var genreText = ""
-
-                    if !movie.genres.isEmpty {
-                        for value in movie.genres {
-                            if let value = value.name {
-                                genreText += value
-                            }
-
-                            if value.name != lastGenre {
-                                genreText += ", "
-                            }
-                        }
-                    } else {
-                        genreText = "No genres founded"
-                    }
-
-                    self.genreLabel.text = genreText
-                    let formatter = DateFormatter()
-                    let dateFromString = formatter.date(from: movie.release_date ?? "")
-                    let calendar = Calendar.current.component(.year, from: dateFromString ?? Date())
-                    self.anoLancamentoLabel.text = "\(calendar)"
-                }
-            }
-        }
+//        TMDBConfig.apikey = "07ca879e7c8e68dd031be7a9dfd50689"
+//        MovieMDB.movie(movieID: id) {_, movie in
+//            if let movie = movie {
+//                DispatchQueue.main.async {
+//                    self.titleLabel.text = movie.title
+//                    self.setupImage(from: movie.backdrop_path ?? "")
+//                    self.duracaoLabel.text = "\(movie.runtime ?? 12) min"
+//                    self.overviewLabel.text = movie.overview
+//                    let lastGenre = movie.genres.last?.name
+//                    var genreText = ""
+//
+//                    if !movie.genres.isEmpty {
+//                        for value in movie.genres {
+//                            if let value = value.name {
+//                                genreText += value
+//                            }
+//
+//                            if value.name != lastGenre {
+//                                genreText += ", "
+//                            }
+//                        }
+//                    } else {
+//                        genreText = "No genres founded"
+//                    }
+//
+//                    self.genreLabel.text = genreText
+//                    let formatter = DateFormatter()
+//                    let dateFromString = formatter.date(from: movie.release_date ?? "")
+//                    let calendar = Calendar.current.component(.year, from: dateFromString ?? Date())
+//                    self.anoLancamentoLabel.text = "\(calendar)"
+//                }
+//            }
+//        }
     }
 
     func setupImage(from path: String) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MoviesViewCell: UICollectionViewCell {
+final class CollectionViewTableViewCell: UITableViewCell {
     private let cellImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 12
@@ -27,8 +27,8 @@ final class MoviesViewCell: UICollectionViewCell {
         return view
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
 

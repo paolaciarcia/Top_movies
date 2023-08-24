@@ -7,7 +7,6 @@
 
 import UIKit
 import Foundation
-import TMDBSwift
 
 class TheMoviesDBService {
     let apiKey = "07ca879e7c8e68dd031be7a9dfd50689"

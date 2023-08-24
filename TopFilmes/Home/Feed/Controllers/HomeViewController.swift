@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import TMDBSwift
 
 final class HomeViewController: UIViewController {
 
@@ -25,7 +24,6 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        TMDBConfig.apikey = "07ca879e7c8e68dd031be7a9dfd50689"
         setupNavigationBar()
         view.backgroundColor = UIColor(hexString: "#202D3C")
         show()
@@ -33,6 +31,11 @@ final class HomeViewController: UIViewController {
 
     override func loadView() {
         view = contentView
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        contentView.frame = view.bounds
     }
 
     private func setupNavigationBar() {
