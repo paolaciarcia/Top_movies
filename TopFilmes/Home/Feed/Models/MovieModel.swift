@@ -8,5 +8,11 @@
 import UIKit
 
 struct MovieModel: Equatable {
+    let section: String?
+    let items: [Items]
+}
+
+
+struct Items: Equatable {
     var image: UIImage?
 }

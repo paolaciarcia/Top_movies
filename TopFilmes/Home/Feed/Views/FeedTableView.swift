@@ -15,6 +15,7 @@ final class FeedTableView: UIView {
 
     private lazy var homeFeedTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.contentInset = .init(top: -30, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(hexString: "#202D3C")
         tableView.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: String(describing: CollectionViewTableViewCell.self))
         tableView.showsVerticalScrollIndicator = false
@@ -70,7 +71,7 @@ final class FeedTableView: UIView {
 
 extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return movies.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,7 +83,7 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
                                                        for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
         let section = indexPath.section
         cell.section = section
-        cell.setup(movies: movies)
+        cell.setup(items: movies[indexPath.row].items)
         return cell
     }
 
@@ -90,7 +91,7 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
         let section = indexPath.section
 
         if section == 0 {
-            return 240
+            return 250
         } else {
             return 182
         }
@@ -105,7 +106,7 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section"
+        return movies[section].section
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

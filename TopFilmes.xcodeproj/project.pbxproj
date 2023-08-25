@@ -202,6 +202,7 @@
 		C5280FD32A97A2B800F01A4A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C5FFE1312A8FF6E300CA1A0D /* MovieModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				C5FFE12B2A8FE4DD00CA1A0D /* CollectionViewTableViewCell.swift */,
-				C5FFE1312A8FF6E300CA1A0D /* MovieModel.swift */,
 				C5FFE1272A8FA9CC00CA1A0D /* SegmentedControlView.swift */,
 				C5FFE1392A90024E00CA1A0D /* FeedTableView.swift */,
 				C52D9B2F2A97BA3B00F4F740 /* CollectionViewCell.swift */,

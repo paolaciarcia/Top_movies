@@ -9,7 +9,7 @@ import UIKit
 
 final class CollectionViewTableViewCell: UITableViewCell {
 
-    private var movies: [MovieModel] = []
+    private var items: [Items] = []
     var section: Int = 0
 
     private lazy var collectionView: UICollectionView = {
@@ -55,8 +55,8 @@ final class CollectionViewTableViewCell: UITableViewCell {
         contentView.addSubview(collectionView)
     }
 
-    func setup(movies: [MovieModel]) {
-        self.movies = movies
+    func setup(items: [Items]) {
+        self.items = items
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
@@ -65,7 +65,7 @@ final class CollectionViewTableViewCell: UITableViewCell {
 
 extension CollectionViewTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return items.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,7 +74,7 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
         ) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.show(image: movies[indexPath.item].image)
+        cell.show(image: items[indexPath.item].image)
         return cell
     }
 }

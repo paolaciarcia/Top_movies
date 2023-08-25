@@ -48,13 +48,18 @@ final class HomeViewController: UIViewController {
     }
 
     private func show() {
+        let items = [
+            Items(image: .init(named: "posterImage")),
+            Items(image: .init(named: "posterImage")),
+            Items(image: .init(named: "posterImage")),
+            Items(image: .init(named: "posterImage")),
+            Items(image: .init(named: "posterImage")),
+            Items(image: .init(named: "posterImage"))
+        ]
         let movies = [
-            MovieModel(image: .init(named: "posterImage")),
-            MovieModel(image: .init(named: "posterImage")),
-            MovieModel(image: .init(named: "posterImage")),
-            MovieModel(image: .init(named: "posterImage")),
-            MovieModel(image: .init(named: "posterImage")),
-            MovieModel(image: .init(named: "posterImage"))
+            MovieModel(section: nil, items: items),
+            MovieModel(section: "Most popular", items: items),
+            MovieModel(section: "Highest rated", items: items)
         ]
         contentView.setup(movies: movies)
     }
