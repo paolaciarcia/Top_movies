@@ -40,9 +40,9 @@ final class MoviesView: UIView {
             segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
 
             tableView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
