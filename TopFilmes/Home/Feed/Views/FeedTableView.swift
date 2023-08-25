@@ -15,9 +15,12 @@ final class FeedTableView: UIView {
 
     private lazy var homeFeedTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.contentInset = .init(top: -30, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = .init(top: -10, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(hexString: "#202D3C")
-        tableView.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: String(describing: CollectionViewTableViewCell.self))
+        tableView.register(CollectionViewTableViewCell.self,
+                           forCellReuseIdentifier: String(describing: CollectionViewTableViewCell.self))
+        tableView.register(FeedHeaderForSectionView.self,
+                           forHeaderFooterViewReuseIdentifier: String(describing: FeedHeaderForSectionView.self))
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
@@ -99,16 +102,20 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 5
+            return 0
         } else {
-            return 50
+            return 30
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return movies[section].section
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: String(describing: FeedHeaderForSectionView.self)
+        ) as? FeedHeaderForSectionView else { return UIView() }
+        headerView.show(titleForSection: movies[section].section)
+        return headerView
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 36 {
             self.segmentedControlView.isHidden = true

@@ -42,7 +42,8 @@ final class HomeViewController: UIViewController {
 
     private func setCustomNavigationBarTitleAttributes() {
         let attrs = [
-            NSAttributedString.Key.font: UIFont(name: "SignPainter", size: 48)
+            NSAttributedString.Key.font: UIFont(name: "SignPainter", size: 48),
+            NSAttributedString.Key.foregroundColor: UIColor.white
         ]
         navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
     }

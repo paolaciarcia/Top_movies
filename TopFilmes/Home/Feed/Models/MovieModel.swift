@@ -12,7 +12,6 @@ struct MovieModel: Equatable {
     let items: [Items]
 }
 
-
 struct Items: Equatable {
     var image: UIImage?
 }
