@@ -10,6 +10,8 @@ import UIKit
 final class FeedTableView: UIView {
 
     private var movies: [MovieModel] = []
+    private var bottomNavigationBarConstraint = NSLayoutConstraint()
+    private let segmentedControlView = SegmentedControlView()
 
     private lazy var homeFeedTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -33,17 +35,29 @@ final class FeedTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        homeFeedTableView.frame = bounds
-    }
-
     private func setup() {
         setupViewHierarchy()
+        setupConstraints()
+        segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupViewHierarchy() {
+        addSubview(segmentedControlView)
         addSubview(homeFeedTableView)
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            segmentedControlView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            segmentedControlView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            homeFeedTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            homeFeedTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            homeFeedTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ])
+
+        bottomNavigationBarConstraint = homeFeedTableView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15)
+        bottomNavigationBarConstraint.isActive = true
     }
     
     func setup(movies: [MovieModel]) {
@@ -56,7 +70,7 @@ final class FeedTableView: UIView {
 
 extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,6 +97,30 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        if section == 0 {
+            return 5
+        } else {
+            return 50
+        }
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Section"
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 36 {
+            self.segmentedControlView.isHidden = true
+            self.bottomNavigationBarConstraint.constant = -30
+            UIView.animate(withDuration: 0.5) {
+                self.layoutIfNeeded()
+            }
+        } else {
+            self.segmentedControlView.isHidden = false
+            self.bottomNavigationBarConstraint.constant = 15
+            UIView.animate(withDuration: 0.3) {
+                self.layoutIfNeeded()
+            }
+        }
     }
 }

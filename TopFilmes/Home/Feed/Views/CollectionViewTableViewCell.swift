@@ -51,24 +51,6 @@ final class CollectionViewTableViewCell: UITableViewCell {
         setupViewHierarchy()
     }
 
-    private func setupConstraintForFirstAndLastCell() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-
-    private func setupConstraintForMiddleCell() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-
     private func setupViewHierarchy() {
         contentView.addSubview(collectionView)
     }
@@ -103,7 +85,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width =  UIScreen.main.bounds.width
         if section == 0 {

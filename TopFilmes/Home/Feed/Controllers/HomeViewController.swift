@@ -9,7 +9,7 @@ import UIKit
 
 final class HomeViewController: UIViewController {
 
-    private let contentView = MoviesView()
+    private let contentView = FeedTableView()
     private let viewModel: MoviesViewModel
 
     init(viewModel: MoviesViewModel = MoviesViewModel()) {
@@ -32,11 +32,6 @@ final class HomeViewController: UIViewController {
     override func loadView() {
         view = contentView
     }
-
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        contentView.frame = view.bounds
-//    }
 
     private func setupNavigationBar() {
         navigationItem.title = "Cinewatch"
@@ -61,7 +56,7 @@ final class HomeViewController: UIViewController {
             MovieModel(image: .init(named: "posterImage")),
             MovieModel(image: .init(named: "posterImage"))
         ]
-        contentView.show(movies: movies)
+        contentView.setup(movies: movies)
     }
 }
 
