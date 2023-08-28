@@ -9,7 +9,7 @@ import UIKit
 
 final class HomeViewController: UIViewController {
 
-    private let contentView = FeedTableView()
+    private let contentView = FeedErrorView()
     private let viewModel: MoviesViewModel
 
     init(viewModel: MoviesViewModel = MoviesViewModel()) {
@@ -62,7 +62,7 @@ final class HomeViewController: UIViewController {
             MovieModel(section: "Most popular", items: items),
             MovieModel(section: "Highest rated", items: items)
         ]
-        contentView.setup(movies: movies)
+//        contentView.setup(movies: movies)
     }
 }
 
