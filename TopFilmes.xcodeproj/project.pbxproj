@@ -24,6 +24,8 @@
 		B13999C2D9A6C74AD849A418 /* Pods_TopFilmes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B8335FF3439BDE0BF680B9 /* Pods_TopFilmes.framework */; };
 		C52D9B302A97BA3B00F4F740 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D9B2F2A97BA3B00F4F740 /* CollectionViewCell.swift */; };
 		C52D9B342A9957C000F4F740 /* FeedHeaderForSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D9B332A9957C000F4F740 /* FeedHeaderForSectionView.swift */; };
+		C52D9B362A9CEFB500F4F740 /* FeedLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D9B352A9CEFB500F4F740 /* FeedLoadingView.swift */; };
+		C52D9B382A9CEFC400F4F740 /* FeedErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D9B372A9CEFC400F4F740 /* FeedErrorView.swift */; };
 		C5FFE1102A8A430500CA1A0D /* LocalizableStrings.strings in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE10F2A8A430500CA1A0D /* LocalizableStrings.strings */; };
 		C5FFE1132A8A45B600CA1A0D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1122A8A45B600CA1A0D /* Strings.swift */; };
 		C5FFE1162A8E513B00CA1A0D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFE1152A8E513B00CA1A0D /* TabBarController.swift */; };
@@ -62,6 +64,8 @@
 		B4E28CA248D30665EA3A1555 /* Pods-TopFilmes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopFilmes.debug.xcconfig"; path = "Target Support Files/Pods-TopFilmes/Pods-TopFilmes.debug.xcconfig"; sourceTree = "<group>"; };
 		C52D9B2F2A97BA3B00F4F740 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C52D9B332A9957C000F4F740 /* FeedHeaderForSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeaderForSectionView.swift; sourceTree = "<group>"; };
+		C52D9B352A9CEFB500F4F740 /* FeedLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoadingView.swift; sourceTree = "<group>"; };
+		C52D9B372A9CEFC400F4F740 /* FeedErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedErrorView.swift; sourceTree = "<group>"; };
 		C5FFE10F2A8A430500CA1A0D /* LocalizableStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = LocalizableStrings.strings; sourceTree = "<group>"; };
 		C5FFE1122A8A45B600CA1A0D /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		C5FFE1152A8E513B00CA1A0D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				C5FFE1392A90024E00CA1A0D /* FeedTableView.swift */,
 				C52D9B2F2A97BA3B00F4F740 /* CollectionViewCell.swift */,
 				C52D9B332A9957C000F4F740 /* FeedHeaderForSectionView.swift */,
+				C52D9B352A9CEFB500F4F740 /* FeedLoadingView.swift */,
+				C52D9B372A9CEFC400F4F740 /* FeedErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 				C5FFE12C2A8FE4DD00CA1A0D /* CollectionViewTableViewCell.swift in Sources */,
 				603CC6D625FBBBF600911BE2 /* FavoritesMoviesTableViewController.swift in Sources */,
 				60DF4DF625F11D3500A8EFAC /* LibraryViewController.swift in Sources */,
+				C52D9B382A9CEFC400F4F740 /* FeedErrorView.swift in Sources */,
 				603CC6D325FBB7A100911BE2 /* GenresHeaderView.swift in Sources */,
 				C5FFE12E2A8FEA8D00CA1A0D /* UIImageView+Ext.swift in Sources */,
 				C5FFE11C2A8E588500CA1A0D /* SearchViewController.swift in Sources */,
@@ -427,6 +434,7 @@
 				60DF4E0D25F1273F00A8EFAC /* PopularMovies.swift in Sources */,
 				C5FFE1132A8A45B600CA1A0D /* Strings.swift in Sources */,
 				60DF4E2225F6B61B00A8EFAC /* DetailViewController.swift in Sources */,
+				C52D9B362A9CEFB500F4F740 /* FeedLoadingView.swift in Sources */,
 				C5FFE11E2A8E589500CA1A0D /* FavoritesViewController.swift in Sources */,
 				60B0C0D826015D85007BE695 /* favoriteCell.swift in Sources */,
 				601C7810260A922100F13954 /* ImageService.swift in Sources */,
