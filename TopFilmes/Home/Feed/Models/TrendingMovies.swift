@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Model
 
-struct PopularMovies: Codable {
+struct TrendingMovies: Codable {
     let page: Int?
     let results: [Movie]?
     let totalPages: Int?

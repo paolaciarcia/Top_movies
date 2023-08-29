@@ -9,11 +9,15 @@ import UIKit
 
 final class HomeViewController: UIViewController {
 
-    private let contentView = FeedErrorView()
+    private let contentView = FeedTableView()
     private let viewModel: MoviesViewModel
 
-    init(viewModel: MoviesViewModel = MoviesViewModel()) {
+    private var service: FeedTrendingMoviesServiceProtocol
+
+    init(viewModel: MoviesViewModel = MoviesViewModel(),
+         service: FeedTrendingMoviesServiceProtocol = FeedService()) {
         self.viewModel = viewModel
+        self.service = service
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,6 +31,8 @@ final class HomeViewController: UIViewController {
         setupNavigationBar()
         view.backgroundColor = UIColor(hexString: "#202D3C")
         show()
+
+        getTrendingMovies()
     }
 
     override func loadView() {
@@ -48,6 +54,10 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
     }
 
+    private func getTrendingMovies() {
+        service.fetchMovies()
+    }
+
     private func show() {
         let items = [
             Items(image: .init(named: "posterImage")),
@@ -62,7 +72,7 @@ final class HomeViewController: UIViewController {
             MovieModel(section: "Most popular", items: items),
             MovieModel(section: "Highest rated", items: items)
         ]
-//        contentView.setup(movies: movies)
+        contentView.setup(movies: movies)
     }
 }
 
