@@ -92,7 +92,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegateFlowLayout {
 
         switch section {
         case Sections.trendingMovies.rawValue:
-            return CGSize(width: width * 0.92, height: 228)
+            return CGSize(width: width * 0.92, height: 280)
         case Sections.popularMovies.rawValue, Sections.topRatedMovies.rawValue:
             return CGSize(width: 132, height: 172)
         default:

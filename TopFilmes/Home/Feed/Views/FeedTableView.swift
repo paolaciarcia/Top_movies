@@ -121,7 +121,7 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
 
         switch indexPath.section {
         case Sections.trendingMovies.rawValue:
-            return 250
+            return 300
         case Sections.popularMovies.rawValue, Sections.topRatedMovies.rawValue:
             return 195
         default:

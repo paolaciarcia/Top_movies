@@ -22,6 +22,8 @@ extension UIImageView {
                        size: ImageSizes,
                        path: String?,
                        placeholderImage: UIImage? = nil) {
+        showLoading()
+
         DispatchQueue.global().async { [weak self] in
             guard let path = path,
                   let urlString = URL(string: "\(baseURL)\(size)\(path)"),
@@ -30,14 +32,34 @@ extension UIImageView {
                 self?.setImage(data: placeholderImage)
                 return
             }
-            print("urlString: \(urlString)")
             self?.setImage(data: downloadedImage)
         }
     }
 
     private func setImage(data: UIImage?) {
         DispatchQueue.main.async { [weak self] in
+            self?.hideLoading()
             self?.image = data
         }
+    }
+
+    private func showLoading() {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.startAnimating()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(activityIndicator)
+
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+
+    private func hideLoading() {
+        let activityIndicator = subviews.first { view in
+            view.isKind(of: UIActivityIndicatorView.self)
+        }
+        activityIndicator?.removeFromSuperview()
     }
 }
