@@ -70,7 +70,7 @@ final class CollectionViewCell: UICollectionViewCell {
     func show(image: String?) {
         DispatchQueue.main.async { [weak self] in
             self?.cellImage.downloadImage(baseURL: FeedEndpoints.movieImages.url,
-                                          size: .w500,
+                                          size: .original,
                                           path: image)
         }
     }

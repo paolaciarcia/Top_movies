@@ -24,6 +24,7 @@ struct PopularMovies: Codable {
 }
 
 struct Movie: Codable, Hashable {
+    let backdropPath: String
     let posterPath: String
     let adult: Bool
     let overview: String
@@ -37,6 +38,7 @@ struct Movie: Codable, Hashable {
     let voteCount: Int
 
     enum CodingKeys: String, CodingKey {
+        case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
         case adult
         case overview

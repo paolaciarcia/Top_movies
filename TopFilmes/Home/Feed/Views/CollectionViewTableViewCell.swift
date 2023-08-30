@@ -74,9 +74,20 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
         ) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
-        let imageItems = movies[indexPath.item].posterPath
-        cell.show(image: imageItems)
-        return cell
+
+        let posterPathImage = movies[indexPath.item].posterPath
+        let backdropPathImage = movies[indexPath.item].backdropPath
+
+        switch section {
+        case Sections.trendingMovies.rawValue:
+            cell.show(image: backdropPathImage)
+            return cell
+        case Sections.popularMovies.rawValue, Sections.topRatedMovies.rawValue:
+            cell.show(image: posterPathImage)
+            return cell
+        default:
+            return cell
+        }
     }
 }
 
@@ -92,7 +103,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegateFlowLayout {
 
         switch section {
         case Sections.trendingMovies.rawValue:
-            return CGSize(width: width * 0.92, height: 280)
+            return CGSize(width: width * 0.92, height: 230)
         case Sections.popularMovies.rawValue, Sections.topRatedMovies.rawValue:
             return CGSize(width: 132, height: 172)
         default:
