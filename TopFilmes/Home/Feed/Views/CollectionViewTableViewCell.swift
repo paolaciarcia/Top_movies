@@ -9,7 +9,7 @@ import UIKit
 
 final class CollectionViewTableViewCell: UITableViewCell {
 
-    private var items: [Items] = []
+    private var movies: [Movie] = []
     var section: Int = 0
 
     private lazy var collectionView: UICollectionView = {
@@ -55,8 +55,8 @@ final class CollectionViewTableViewCell: UITableViewCell {
         contentView.addSubview(collectionView)
     }
 
-    func setup(items: [Items]) {
-        self.items = items
+    func setup(movies: [Movie]) {
+        self.movies = movies
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
@@ -65,7 +65,7 @@ final class CollectionViewTableViewCell: UITableViewCell {
 
 extension CollectionViewTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return movies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,7 +74,8 @@ extension CollectionViewTableViewCell: UICollectionViewDataSource {
         ) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.show(image: items[indexPath.item].image)
+        let imageItems = movies[indexPath.item].posterPath
+        cell.show(image: imageItems)
         return cell
     }
 }
@@ -85,13 +86,16 @@ extension CollectionViewTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width =  UIScreen.main.bounds.width
-        if section == 0 {
-            return CGSize(width: width * 0.92, height: 228)
 
-        } else {
+        switch section {
+        case Sections.trendingMovies.rawValue:
+            return CGSize(width: width * 0.92, height: 228)
+        case Sections.popularMovies.rawValue, Sections.topRatedMovies.rawValue:
+            return CGSize(width: 132, height: 172)
+        default:
             return CGSize(width: 132, height: 172)
         }
     }

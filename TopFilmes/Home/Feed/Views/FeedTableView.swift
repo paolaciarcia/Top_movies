@@ -9,7 +9,17 @@ import UIKit
 
 final class FeedTableView: UIView {
 
-    private var movies: [MovieModel] = []
+    var wantsToShowTrendingMovies: (([Movie]) -> Void)?
+    var wantsToShowPopularMovies: (([Movie]) -> Void)?
+    var wantsToShowTopRatedMovies: (([Movie]) -> Void)?
+
+    private let sectionTitles = [
+        nil,
+        "Most Popular",
+        "Highest rated"
+    ]
+
+    private var movies: [Movie] = []
     private var bottomNavigationBarConstraint = NSLayoutConstraint()
     private let segmentedControlView = SegmentedControlView()
 
@@ -64,7 +74,7 @@ final class FeedTableView: UIView {
         bottomNavigationBarConstraint.isActive = true
     }
     
-    func setup(movies: [MovieModel]) {
+    func setup(movies: [Movie]) {
         self.movies = movies
         DispatchQueue.main.async { [weak self] in
             self?.homeFeedTableView.reloadData()
@@ -74,7 +84,7 @@ final class FeedTableView: UIView {
 
 extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return movies.count
+        return 3
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,26 +94,49 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CollectionViewTableViewCell.self),
                                                        for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
-        let section = indexPath.section
-        cell.section = section
-        cell.setup(items: movies[indexPath.row].items)
+        switch indexPath.section {
+        case Sections.trendingMovies.rawValue:
+            wantsToShowTrendingMovies = { movies in
+                cell.setup(movies: movies)
+                cell.section = 0
+            }
+
+        case Sections.popularMovies.rawValue:
+            wantsToShowPopularMovies = { movies in
+                cell.setup(movies: movies)
+                cell.section = 1
+            }
+        case Sections.topRatedMovies.rawValue:
+            wantsToShowTopRatedMovies = { movies in
+                cell.setup(movies: movies)
+                cell.section = 2
+            }
+        default:
+            return UITableViewCell()
+        }
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section = indexPath.section
 
-        if section == 0 {
+        switch indexPath.section {
+        case Sections.trendingMovies.rawValue:
             return 250
-        } else {
-            return 182
+        case Sections.popularMovies.rawValue, Sections.topRatedMovies.rawValue:
+            return 195
+        default:
+            return 195
         }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
+
+        switch section {
+        case Sections.trendingMovies.rawValue:
             return 0
-        } else {
+        case Sections.popularMovies.rawValue, Sections.topRatedMovies.rawValue:
+            return 30
+        default:
             return 30
         }
     }
@@ -112,7 +145,7 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: String(describing: FeedHeaderForSectionView.self)
         ) as? FeedHeaderForSectionView else { return UIView() }
-        headerView.show(titleForSection: movies[section].section)
+        headerView.show(titleForSection: sectionTitles[section])
         return headerView
     }
     

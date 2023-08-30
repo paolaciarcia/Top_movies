@@ -62,7 +62,16 @@ final class CollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    func show(image: UIImage?) {
-        cellImage.image = image
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cellImage.image = nil
+    }
+
+    func show(image: String?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.cellImage.downloadImage(baseURL: FeedEndpoints.movieImages.url,
+                                          size: .w500,
+                                          path: image)
+        }
     }
 }

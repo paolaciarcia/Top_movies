@@ -7,7 +7,7 @@
 
 import UIKit
 import Foundation
-
+//https://api.themoviedb.org/t/p/
 class ImageService {
     let baseUrl = "https://image.tmdb.org/t/p/"
 

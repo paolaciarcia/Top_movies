@@ -7,42 +7,49 @@
 
 import Foundation
 
-protocol MoviesListProtocol {
+protocol HomeViewControllerDelegate: AnyObject {
+    func showPopularMovies(data: [Movie])
+    func showTopRatedMovies(data: [Movie])
+    func showTrendingMovies(data: [Movie])
+    func showError()
 
 }
 
-protocol MoviesViewModelDelegate: AnyObject {
-    func showMovieImage(with string: String?)
+final class MoviesViewModel: MoviesViewModelProtocol {
 
-}
+    private var service: FeedPopularMoviesServiceProtocol
+    weak var delegate: HomeViewControllerDelegate?
 
-final class MoviesViewModel {
-
-    private let service: MoviesListProtocol
-    weak var delegate: MoviesViewModelDelegate?
-
-    init(service: MoviesListProtocol = MoviesListService()) {
+    init(service: FeedPopularMoviesServiceProtocol = FeedService()) {
         self.service = service
-//        self.delegate = delegate
+        self.service.delegate = self
     }
 
-    func fetchMovies() {
-//        MovieMDB.popular(page: 1) { data, requestMovie in
-//            guard let requestMovie = requestMovie else { return }
-//            self.delegate?.showMovieImage(with: requestMovie[0].backdrop_path)
-//        }
+    func showPopularMoviesData() {
+        service.fetchPopularMovies()
+        service.fetchTrendingMovies()
+        service.fetchTopRatedMovies()
     }
 }
-/*
- MovieMDB.popular(apikey, language: "en", page: 1){
- data, popularMovies in
- if let movie = popularMovies{
- print(movie[0].title)
- print(movie[0].original_title)
- print(movie[0].release_date)
- print(movie[0].overview)
- }
- */
-final class MoviesListService: MoviesListProtocol {
 
+extension MoviesViewModel: FeedPopularMoviesServiceDelegate {
+    func didTopRated(movies: PopularMovies) {
+        delegate?.showTopRatedMovies(data: movies.results)
+    }
+
+    func didReceiveTrending(movies: PopularMovies) {
+        delegate?.showTrendingMovies(data: movies.results)
+    }
+
+    func didReceivePopular(movies: PopularMovies) {
+        delegate?.showPopularMovies(data: movies.results)
+    }
+
+    func didReceiveError(ofType: ClientError) {
+        delegate?.showError()
+    }
+
+    func didReceiveEmptyResult() {
+        delegate?.showError()
+    }
 }

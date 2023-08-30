@@ -7,17 +7,24 @@
 
 import UIKit
 
+protocol MoviesViewModelProtocol {
+    var delegate: HomeViewControllerDelegate? { get set }
+    func showPopularMoviesData()
+}
+
+enum Sections: Int {
+    case trendingMovies
+    case popularMovies
+    case topRatedMovies
+}
+
 final class HomeViewController: UIViewController {
 
     private let contentView = FeedTableView()
-    private let viewModel: MoviesViewModel
+    private var viewModel: MoviesViewModelProtocol
 
-    private var service: FeedTrendingMoviesServiceProtocol
-
-    init(viewModel: MoviesViewModel = MoviesViewModel(),
-         service: FeedTrendingMoviesServiceProtocol = FeedService()) {
+    init(viewModel: MoviesViewModelProtocol = MoviesViewModel()) {
         self.viewModel = viewModel
-        self.service = service
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,9 +37,8 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         view.backgroundColor = UIColor(hexString: "#202D3C")
-        show()
-
-        getTrendingMovies()
+        viewModel.delegate = self
+        viewModel.showPopularMoviesData()
     }
 
     override func loadView() {
@@ -53,29 +59,22 @@ final class HomeViewController: UIViewController {
         ]
         navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
     }
-
-    private func getTrendingMovies() {
-        service.fetchMovies()
-    }
-
-    private func show() {
-        let items = [
-            Items(image: .init(named: "posterImage")),
-            Items(image: .init(named: "posterImage")),
-            Items(image: .init(named: "posterImage")),
-            Items(image: .init(named: "posterImage")),
-            Items(image: .init(named: "posterImage")),
-            Items(image: .init(named: "posterImage"))
-        ]
-        let movies = [
-            MovieModel(section: nil, items: items),
-            MovieModel(section: "Most popular", items: items),
-            MovieModel(section: "Highest rated", items: items)
-        ]
-        contentView.setup(movies: movies)
-    }
 }
 
-extension HomeViewController: MoviesViewModelDelegate {
-    func showMovieImage(with string: String?) {}
+extension HomeViewController: HomeViewControllerDelegate {
+    func showTopRatedMovies(data: [Movie]) {
+        contentView.wantsToShowTopRatedMovies?(data)
+    }
+
+    func showTrendingMovies(data: [Movie]) {
+        contentView.wantsToShowTrendingMovies?(data)
+    }
+
+    func showPopularMovies(data: [Movie]) {
+        contentView.wantsToShowPopularMovies?(data)
+    }
+
+    func showError() {
+        print("ERROR")
+    }
 }

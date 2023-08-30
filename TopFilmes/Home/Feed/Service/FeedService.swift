@@ -7,42 +7,68 @@
 
 import Foundation
 
-protocol FeedTrendingMoviesServiceDelegate: AnyObject {
-    func didReceive(movies: [Movie])
-    func didReceiveError()
+protocol FeedPopularMoviesServiceDelegate: AnyObject {
+    func didReceivePopular(movies: PopularMovies)
+    func didTopRated(movies: PopularMovies)
+    func didReceiveTrending(movies: PopularMovies)
+    func didReceiveError(ofType: ClientError)
     func didReceiveEmptyResult()
 }
 
-protocol FeedTrendingMoviesServiceProtocol {
-    var delegate: FeedTrendingMoviesServiceDelegate? { get set }
+protocol FeedPopularMoviesServiceProtocol {
+    var delegate: FeedPopularMoviesServiceDelegate? { get set }
     func fetchMoviesRetry()
-    func fetchMovies()
+    func fetchPopularMovies()
+    func fetchTopRatedMovies()
+    func fetchTrendingMovies()
 }
 
 final class FeedService {
     private let api: FeedAPIProtocol
     private var lastQuery: String?
-    weak var delegate: FeedTrendingMoviesServiceDelegate?
+    weak var delegate: FeedPopularMoviesServiceDelegate?
 
     init(api: FeedAPIProtocol = FeedAPI.make()) {
         self.api = api
     }
 }
 
-extension FeedService: FeedTrendingMoviesServiceProtocol {
+extension FeedService: FeedPopularMoviesServiceProtocol {
     func fetchMoviesRetry() {
         guard let query = lastQuery else { return }
         lastQuery = query
 
     }
 
-    func fetchMovies() {
+    func fetchPopularMovies() {
+        api.fetchPopularMovies { [weak self] result in
+            switch result {
+            case let .success(movies):
+                self?.delegate?.didReceivePopular(movies: movies)
+            case let .failure(error):
+                self?.delegate?.didReceiveError(ofType: error)
+            }
+        }
+    }
+
+    func fetchTopRatedMovies() {
+        api.fetchTopRatedMovies { [weak self] result in
+            switch result {
+            case let .success(movies):
+                self?.delegate?.didTopRated(movies: movies)
+            case let .failure(error):
+                self?.delegate?.didReceiveError(ofType: error)
+            }
+        }
+    }
+
+    func fetchTrendingMovies() {
         api.fetchTrendingMovies { [weak self] result in
             switch result {
-            case let .success(success):
-                print("SUCCESS:\(success)")
-            case let .failure(failure):
-                print("FAILURE: \(failure)")
+            case let .success(movies):
+                self?.delegate?.didReceiveTrending(movies: movies)
+            case let .failure(error):
+                self?.delegate?.didReceiveError(ofType: error)
             }
         }
     }
