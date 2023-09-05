@@ -9,28 +9,22 @@ import UIKit
 
 final class CircularProgressView: UIView {
 
-    var avarageText: String {
-        didSet {
-            averageLabel.text = avarageText
-        }
-    }
+    private var backgroundRoundColor = CAShapeLayer()
+    private var remainderProgressLayer = CAShapeLayer()
+    private var progressLayer = CAShapeLayer()
+    private var progressColor: UIColor
 
-    var color: UIColor
-
-    var progress: CGFloat {
+    private var progress: CGFloat {
         didSet {
             setNeedsDisplay()
         }
     }
 
-    init(avarageText: String,
-         color: UIColor,
+    init(color: UIColor,
          progress: CGFloat) {
-        self.avarageText = avarageText
-        self.color = color
+        self.progressColor = color
         self.progress = progress
         super.init(frame: .zero)
-        setup()
     }
 
     @available(*, unavailable)
@@ -47,13 +41,24 @@ final class CircularProgressView: UIView {
         let borderPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
 
         let borderPathRemainder = UIBezierPath(arcCenter: center, radius: radius, startAngle: endAngle, endAngle: startAngle, clockwise: true)
-        borderPathRemainder.lineWidth = 10.0
-        UIColor.systemGray4.setStroke()
-        borderPathRemainder.stroke()
 
-        borderPath.lineWidth = 10.0
-        color.setStroke()
-        borderPath.stroke()
+        backgroundRoundColor.path = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: 2 * .pi, clockwise: true).cgPath
+        backgroundRoundColor.fillColor = UIColor.red.cgColor
+
+        progressLayer.path = borderPath.cgPath
+        progressLayer.lineCap = .round
+        progressLayer.lineWidth = 10.0
+        progressLayer.strokeColor = progressColor.cgColor
+        progressLayer.fillColor = UIColor.clear.cgColor
+
+        remainderProgressLayer.path = borderPathRemainder.cgPath
+        remainderProgressLayer.lineWidth = 10.0
+        remainderProgressLayer.strokeColor = UIColor.systemGray4.cgColor
+        remainderProgressLayer.fillColor = UIColor.clear.cgColor
+
+        layer.addSublayer(backgroundRoundColor)
+        layer.addSublayer(remainderProgressLayer)
+        layer.addSublayer(progressLayer)
     }
 
 //    private let ratingLabel: UILabel = {
@@ -65,30 +70,4 @@ final class CircularProgressView: UIView {
 //        return label
 //    }()
 
-        private let averageLabel: UILabel = {
-            let label = UILabel()
-            label.font = UIFont(name: "SF Pro Rounded", size: 24)
-            label.textColor = .white
-            label.numberOfLines = 0
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-
-    private func setup() {
-        setupViewHierarchy()
-        setupConstraints()
-    }
-
-    private func setupViewHierarchy() {
-        addSubview(averageLabel)
-    }
-
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            averageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            averageLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            averageLabel.leadingAnchor.constraint(equalTo: trailingAnchor, constant: 20),
-//            averageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-        ])
-    }
 }

@@ -9,7 +9,8 @@ import UIKit
 
 final class DetailViewController: UIViewController {
 
-    private let contentView = CircularProgressView(avarageText: "7.8", color: .green, progress: 0.7)
+    private let contentView = VoteAverageView(avarageText: "7.8", averageColor: .green, progress: 0.7)//CircularProgressView(color: .green, progress: 0.7)
+    //VoteAverageView(avarageText: "7.8", color: .green, progress: 0.7)
 
     init() {
         super.init(nibName: nil, bundle: nil)
