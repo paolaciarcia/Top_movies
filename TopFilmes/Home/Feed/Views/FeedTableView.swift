@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum MoviesFeedState {
+    case ready
+    case loading
+    case error
+}
+
 final class FeedTableView: UIView {
 
     var wantsToShowTrendingMovies: (([Movie]) -> Void)?
@@ -21,11 +27,30 @@ final class FeedTableView: UIView {
 
     private var movies: [Movie] = []
     private var bottomNavigationBarConstraint = NSLayoutConstraint()
-    private let segmentedControlView = SegmentedControlView()
+
+    private let segmentedControlView: SegmentedControlView = {
+        let view = SegmentedControlView()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let errorView: FeedErrorView = {
+        let view = FeedErrorView()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let loadingView: FeedLoadingView = {
+        let view = FeedLoadingView()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     private lazy var homeFeedTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.contentInset = .init(top: -10, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(hexString: "#202D3C")
         tableView.register(CollectionViewTableViewCell.self,
                            forCellReuseIdentifier: String(describing: CollectionViewTableViewCell.self))
@@ -33,12 +58,14 @@ final class FeedTableView: UIView {
                            forHeaderFooterViewReuseIdentifier: String(describing: FeedHeaderForSectionView.self))
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.isHidden = true
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
     }()
 
+    // MARK: - Init
     init() {
         super.init(frame: .zero)
         setup()
@@ -52,12 +79,13 @@ final class FeedTableView: UIView {
     private func setup() {
         setupViewHierarchy()
         setupConstraints()
-        segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupViewHierarchy() {
         addSubview(segmentedControlView)
         addSubview(homeFeedTableView)
+        addSubview(loadingView)
+        addSubview(errorView)
     }
 
     private func setupConstraints() {
@@ -67,24 +95,49 @@ final class FeedTableView: UIView {
             segmentedControlView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             homeFeedTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             homeFeedTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            homeFeedTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            homeFeedTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+
+            errorView.topAnchor.constraint(equalTo: topAnchor),
+            errorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            errorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            errorView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+
+            loadingView.topAnchor.constraint(equalTo: topAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
 
         bottomNavigationBarConstraint = homeFeedTableView.topAnchor.constraint(equalTo: segmentedControlView.bottomAnchor, constant: 15)
         bottomNavigationBarConstraint.isActive = true
     }
-    
-    func setup(movies: [Movie]) {
-        self.movies = movies
-        DispatchQueue.main.async { [weak self] in
-            self?.homeFeedTableView.reloadData()
+
+    // MARK: - Methods
+    func showMovies(state: MoviesFeedState) {
+        switch state {
+        case .ready:
+            segmentedControlView.isHidden = false
+            homeFeedTableView.isHidden = false
+            errorView.isHidden = true
+            loadingView.isHidden = true
+        case .loading:
+            loadingView.isHidden = false
+            segmentedControlView.isHidden = true
+            homeFeedTableView.isHidden = true
+            errorView.isHidden = true
+        case .error:
+            segmentedControlView.isHidden = true
+            homeFeedTableView.isHidden = true
+            errorView.isHidden = false
+            loadingView.isHidden = true
         }
     }
 }
 
-extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
+// MARK: - UITableViewDataSource
+extension FeedTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return sectionTitles.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,21 +149,21 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
                                                        for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
         switch indexPath.section {
         case Sections.trendingMovies.rawValue:
+            cell.section = 0
             wantsToShowTrendingMovies = { movies in
                 cell.setup(movies: movies)
-                cell.section = 0
             }
-
         case Sections.popularMovies.rawValue:
+            cell.section = 1
             wantsToShowPopularMovies = { movies in
                 cell.setup(movies: movies)
-                cell.section = 1
             }
         case Sections.topRatedMovies.rawValue:
+            cell.section = 2
             wantsToShowTopRatedMovies = { movies in
                 cell.setup(movies: movies)
-                cell.section = 2
             }
+
         default:
             return UITableViewCell()
         }
@@ -165,3 +218,6 @@ extension FeedTableView: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
+
+
+extension FeedTableView: UITableViewDelegate {}

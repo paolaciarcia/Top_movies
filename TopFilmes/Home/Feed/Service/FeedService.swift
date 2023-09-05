@@ -13,6 +13,7 @@ protocol FeedPopularMoviesServiceDelegate: AnyObject {
     func didReceiveTrending(movies: PopularMovies)
     func didReceiveError(ofType: ClientError)
     func didReceiveEmptyResult()
+    func didReceiveLoading()
 }
 
 protocol FeedPopularMoviesServiceProtocol {
@@ -41,6 +42,8 @@ extension FeedService: FeedPopularMoviesServiceProtocol {
     }
 
     func fetchPopularMovies() {
+        delegate?.didReceiveLoading()
+
         api.fetchPopularMovies { [weak self] result in
             switch result {
             case let .success(movies):
@@ -52,6 +55,8 @@ extension FeedService: FeedPopularMoviesServiceProtocol {
     }
 
     func fetchTopRatedMovies() {
+        delegate?.didReceiveLoading()
+
         api.fetchTopRatedMovies { [weak self] result in
             switch result {
             case let .success(movies):
@@ -63,6 +68,8 @@ extension FeedService: FeedPopularMoviesServiceProtocol {
     }
 
     func fetchTrendingMovies() {
+        delegate?.didReceiveLoading()
+
         api.fetchTrendingMovies { [weak self] result in
             switch result {
             case let .success(movies):

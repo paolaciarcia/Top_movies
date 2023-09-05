@@ -32,8 +32,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
 }
-
-// TabbarCoordinator
-// - CinewatchCoordinator
-// - SearchCoordinator
-// - FavoritesCoordinator

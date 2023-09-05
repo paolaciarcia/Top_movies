@@ -28,7 +28,7 @@ class TabBarController: UITabBarController {
         let homeBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
         homeController.tabBarItem = homeBarItem        
 
-        let searchController = SearchViewController()
+        let searchController = DetailViewController()//SearchViewController()
         let searchBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglas"))
         searchController.tabBarItem = searchBarItem
 

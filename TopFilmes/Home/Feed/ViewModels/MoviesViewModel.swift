@@ -12,6 +12,7 @@ protocol HomeViewControllerDelegate: AnyObject {
     func showTopRatedMovies(data: [Movie])
     func showTrendingMovies(data: [Movie])
     func showError()
+    func showLoading()
 
 }
 
@@ -25,7 +26,7 @@ final class MoviesViewModel: MoviesViewModelProtocol {
         self.service.delegate = self
     }
 
-    func showPopularMoviesData() {
+    func showMoviesData() {
         service.fetchPopularMovies()
         service.fetchTrendingMovies()
         service.fetchTopRatedMovies()
@@ -51,5 +52,9 @@ extension MoviesViewModel: FeedPopularMoviesServiceDelegate {
 
     func didReceiveEmptyResult() {
         delegate?.showError()
+    }
+
+    func didReceiveLoading() {
+        delegate?.showLoading()
     }
 }

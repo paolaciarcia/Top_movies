@@ -9,7 +9,7 @@ import UIKit
 
 protocol MoviesViewModelProtocol {
     var delegate: HomeViewControllerDelegate? { get set }
-    func showPopularMoviesData()
+    func showMoviesData()
 }
 
 enum Sections: Int {
@@ -37,8 +37,8 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         view.backgroundColor = UIColor(hexString: "#202D3C")
+        viewModel.showMoviesData()
         viewModel.delegate = self
-        viewModel.showPopularMoviesData()
     }
 
     override func loadView() {
@@ -63,18 +63,31 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: HomeViewControllerDelegate {
     func showTopRatedMovies(data: [Movie]) {
-        contentView.wantsToShowTopRatedMovies?(data)
+        DispatchQueue.main.async { [weak self] in
+            self?.contentView.showMovies(state: .ready)
+            self?.contentView.wantsToShowTopRatedMovies?(data)
+        }
     }
 
     func showTrendingMovies(data: [Movie]) {
-        contentView.wantsToShowTrendingMovies?(data)
+        DispatchQueue.main.async { [weak self] in
+            self?.contentView.showMovies(state: .ready)
+            self?.contentView.wantsToShowTrendingMovies?(data)
+        }
     }
 
     func showPopularMovies(data: [Movie]) {
-        contentView.wantsToShowPopularMovies?(data)
+        DispatchQueue.main.async { [weak self] in
+            self?.contentView.showMovies(state: .ready)
+            self?.contentView.wantsToShowPopularMovies?(data)
+        }
     }
 
     func showError() {
-        print("ERROR")
+        contentView.showMovies(state: .error)
+    }
+
+    func showLoading() {
+        contentView.showMovies(state: .loading)
     }
 }

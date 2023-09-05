@@ -68,10 +68,10 @@ final class CollectionViewCell: UICollectionViewCell {
     }
 
     func show(image: String?) {
-        DispatchQueue.main.async { [weak self] in
-            self?.cellImage.downloadImage(baseURL: FeedEndpoints.movieImages.url,
-                                          size: .original,
-                                          path: image)
-        }
+        cellImage.image = nil
+            cellImage.downloadImage(baseURL: FeedEndpoints.movieImages.url,
+                                    size: .original,
+                                    path: image)
+
     }
 }
