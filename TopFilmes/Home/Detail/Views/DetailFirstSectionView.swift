@@ -163,10 +163,9 @@ final class DetailFirstSectionView: UIView {
             mainHorizontalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             spacingView.heightAnchor.constraint(equalToConstant: 20),
             actionsHorizontalStackView.heightAnchor.constraint(equalToConstant: 40),
-            actionsHorizontalStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.45),
+            actionsHorizontalStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.43),
             favoriteButton.widthAnchor.constraint(equalTo: actionsHorizontalStackView.heightAnchor)
         ])
-
     }
 
     func update(state: DetailFirstSectionState) {

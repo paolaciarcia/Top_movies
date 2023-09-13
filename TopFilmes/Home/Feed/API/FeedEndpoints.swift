@@ -12,10 +12,11 @@ enum FeedEndpoints {
     case topRatedMovies
     case trendingMovies
     case movieImages
-
+    case streamings(id: Int)
+//https://api.themoviedb.org/3/movie/{movie_id}/watch/providers
     private var baseURL: String {
         switch self {
-        case .popularMovies, .topRatedMovies, .trendingMovies:
+        case .popularMovies, .topRatedMovies, .trendingMovies, .streamings:
             return "https://api.themoviedb.org"
         case .movieImages:
             return "https://image.tmdb.org"
@@ -32,6 +33,8 @@ enum FeedEndpoints {
             return "/3/trending/movie/week"
         case .movieImages:
             return "/t/p/"
+        case .streamings(let movieId):
+            return "/3/movie/\(movieId)/watch/providers"
         }
     }
 
