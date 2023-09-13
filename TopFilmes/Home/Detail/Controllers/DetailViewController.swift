@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailViewController: UIViewController {
 
-    private let contentView = RateView()
+    private let contentView = DetailFirstSectionView()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -24,9 +24,14 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hexString: "#202D3C")
 
-        let state = RateViewState(averageText: "7.8", averageSize: 50,
-                                  circularProgressState: CircularProgressViewState(progress: 0.5, progressColor: .green))
-        contentView.update(state: state)
+        let rateViewState = RateViewState(averageText: "7.8", averageSize: 25,
+                                          circularProgressState: CircularProgressViewState(progress: 0.5, progressColor: .green))
+        let detailState = DetailFirstSectionState(title: "The Little Marmeid",
+                                                  genre: "Animação, Ação, Aventura, Ficção científica",
+                                                  releaseDate: "20/07/2023 •",
+                                                  duration: "2h 20m",
+                                                  rating: rateViewState)
+        contentView.update(state: detailState)
     }
 
     override func loadView() {

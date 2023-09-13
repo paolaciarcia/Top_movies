@@ -66,7 +66,7 @@ final class RateView: UIView {
             ratingLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             ratingLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            progressView.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 10),
+            progressView.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 20),
             progressView.centerXAnchor.constraint(equalTo: ratingLabel.centerXAnchor),
             progressView.widthAnchor.constraint(equalTo: widthAnchor),
             progressView.heightAnchor.constraint(equalTo: widthAnchor),
@@ -74,8 +74,8 @@ final class RateView: UIView {
 
             averageLabel.centerXAnchor.constraint(equalTo: progressView.centerXAnchor),
             averageLabel.centerYAnchor.constraint(equalTo: progressView.centerYAnchor),
-            averageLabel.trailingAnchor.constraint(equalTo: progressView.trailingAnchor, constant: -20),
-            averageLabel.leadingAnchor.constraint(equalTo: progressView.leadingAnchor, constant: 20)
+            averageLabel.trailingAnchor.constraint(equalTo: progressView.trailingAnchor, constant: -30),
+            averageLabel.leadingAnchor.constraint(equalTo: progressView.leadingAnchor, constant: 30)
         ])
     }
 
