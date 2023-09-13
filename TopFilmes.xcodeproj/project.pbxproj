@@ -15,8 +15,9 @@
 		60DF4E0D25F1273F00A8EFAC /* PopularMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DF4E0C25F1273F00A8EFAC /* PopularMovies.swift */; };
 		B13999C2D9A6C74AD849A418 /* Pods_TopFilmes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B8335FF3439BDE0BF680B9 /* Pods_TopFilmes.framework */; };
 		C518066A2AA751F600203ED3 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51806692AA751F600203ED3 /* CircularProgressView.swift */; };
-		C518066C2AA7593D00203ED3 /* VoteAverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C518066B2AA7593D00203ED3 /* VoteAverageView.swift */; };
+		C518066C2AA7593D00203ED3 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C518066B2AA7593D00203ED3 /* RateView.swift */; };
 		C518066F2AA7602D00203ED3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C518066E2AA7602D00203ED3 /* DetailViewController.swift */; };
+		C51806712AA91B0C00203ED3 /* VoteAverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51806702AA91B0C00203ED3 /* VoteAverageView.swift */; };
 		C52D9B302A97BA3B00F4F740 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D9B2F2A97BA3B00F4F740 /* CollectionViewCell.swift */; };
 		C52D9B342A9957C000F4F740 /* FeedHeaderForSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D9B332A9957C000F4F740 /* FeedHeaderForSectionView.swift */; };
 		C52D9B362A9CEFB500F4F740 /* FeedLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52D9B352A9CEFB500F4F740 /* FeedLoadingView.swift */; };
@@ -58,8 +59,9 @@
 		631E042680A98AA5C4E3F403 /* Pods-TopFilmes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopFilmes.release.xcconfig"; path = "Target Support Files/Pods-TopFilmes/Pods-TopFilmes.release.xcconfig"; sourceTree = "<group>"; };
 		B4E28CA248D30665EA3A1555 /* Pods-TopFilmes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopFilmes.debug.xcconfig"; path = "Target Support Files/Pods-TopFilmes/Pods-TopFilmes.debug.xcconfig"; sourceTree = "<group>"; };
 		C51806692AA751F600203ED3 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
-		C518066B2AA7593D00203ED3 /* VoteAverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteAverageView.swift; sourceTree = "<group>"; };
+		C518066B2AA7593D00203ED3 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		C518066E2AA7602D00203ED3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C51806702AA91B0C00203ED3 /* VoteAverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteAverageView.swift; sourceTree = "<group>"; };
 		C52D9B2F2A97BA3B00F4F740 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C52D9B332A9957C000F4F740 /* FeedHeaderForSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeaderForSectionView.swift; sourceTree = "<group>"; };
 		C52D9B352A9CEFB500F4F740 /* FeedLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoadingView.swift; sourceTree = "<group>"; };
@@ -173,7 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				C51806692AA751F600203ED3 /* CircularProgressView.swift */,
-				C518066B2AA7593D00203ED3 /* VoteAverageView.swift */,
+				C518066B2AA7593D00203ED3 /* RateView.swift */,
+				C51806702AA91B0C00203ED3 /* VoteAverageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -449,10 +452,11 @@
 			files = (
 				C518066F2AA7602D00203ED3 /* DetailViewController.swift in Sources */,
 				C52D9B3D2A9D10B900F4F740 /* FeedAPI.swift in Sources */,
+				C51806712AA91B0C00203ED3 /* VoteAverageView.swift in Sources */,
 				C5FFE12C2A8FE4DD00CA1A0D /* CollectionViewTableViewCell.swift in Sources */,
 				C52D9B382A9CEFC400F4F740 /* FeedErrorView.swift in Sources */,
 				C52D9B3F2A9D16D100F4F740 /* FeedEndpoints.swift in Sources */,
-				C518066C2AA7593D00203ED3 /* VoteAverageView.swift in Sources */,
+				C518066C2AA7593D00203ED3 /* RateView.swift in Sources */,
 				C5FFE12E2A8FEA8D00CA1A0D /* UIImageView+Ext.swift in Sources */,
 				C5FFE11C2A8E588500CA1A0D /* SearchViewController.swift in Sources */,
 				C5FFE1212A8E649900CA1A0D /* UIColor+Ext.swift in Sources */,

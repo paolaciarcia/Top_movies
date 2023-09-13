@@ -9,8 +9,7 @@ import UIKit
 
 final class DetailViewController: UIViewController {
 
-    private let contentView = VoteAverageView(avarageText: "7.8", averageColor: .green, progress: 0.7)//CircularProgressView(color: .green, progress: 0.7)
-    //VoteAverageView(avarageText: "7.8", color: .green, progress: 0.7)
+    private let contentView = RateView()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -24,6 +23,10 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hexString: "#202D3C")
+
+        let state = RateViewState(averageText: "7.8", averageSize: 50,
+                                  circularProgressState: CircularProgressViewState(progress: 0.5, progressColor: .green))
+        contentView.update(state: state)
     }
 
     override func loadView() {

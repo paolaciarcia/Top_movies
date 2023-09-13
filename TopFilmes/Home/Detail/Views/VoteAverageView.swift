@@ -2,43 +2,66 @@
 //  VoteAverageView.swift
 //  TopFilmes
 //
-//  Created by Paola Golombieski Ciarcia on 05/09/23.
+//  Created by Paola Golombieski Ciarcia on 06/09/23.
 //
 
 import UIKit
 
 final class VoteAverageView: UIView {
 
-    private var averageColor: UIColor
-    private var averageSize: CGFloat
-    private var progress: CGFloat
-
-    private lazy var progressView: CircularProgressView = {
-        let view = CircularProgressView(color: averageColor, progress: progress)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let verticalStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 2
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
-    private lazy var averageLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "SF Pro Rounded", size: averageSize)
+        label.font = .systemFont(ofSize: 26, weight: .medium)
         label.textColor = .white
         label.numberOfLines = 0
-        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    init(avarageText: String,
-         avarageSize: CGFloat = 24,
-         averageColor: UIColor,
-         progress: CGFloat) {
-        self.averageColor = averageColor
-        self.averageSize = avarageSize
-        self.progress = progress
+    private let genreLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = UIColor(hexString: "#C7C7CC")
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let releaseDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let runtimeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var rateView: RateView = {
+        let view = RateView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    init() {
         super.init(frame: .zero)
-        averageLabel.text = avarageText
-        setup()
+//        setup()
     }
 
     @available(*, unavailable)
@@ -46,27 +69,7 @@ final class VoteAverageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setup() {
-        setupViewHierarchy()
-        setupConstraints()
-    }
-
-    private func setupViewHierarchy() {
-        addSubview(progressView)
-        addSubview(averageLabel)
-    }
-
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: topAnchor),
-            progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            progressView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
-            averageLabel.centerXAnchor.constraint(equalTo: progressView.centerXAnchor),
-            averageLabel.centerYAnchor.constraint(equalTo: progressView.centerYAnchor),
-            averageLabel.leadingAnchor.constraint(equalTo: progressView.leadingAnchor, constant: 20),
-            averageLabel.trailingAnchor.constraint(equalTo: progressView.trailingAnchor, constant: -20)
-        ])
+    func update(state: RateViewState) {
+        rateView.update(state: state)
     }
 }
